@@ -16,7 +16,7 @@ const server = new GraphQLServer({
 })
 
 const corsOptions = {
-    origin: process.env.NODE_ENV === "production" ? process.env.PRODUCTION_FRONTEND_URL : "http://localhost:3000",
+    origin: process.env.NODE_ENV === "production" ? "http://localhost:3000" : "http://localhost:3000",
     credentials: true // <-- REQUIRED backend setting
 }
 
@@ -24,12 +24,15 @@ server.express.use(cookieParser())
 
 server.express.use((req, res, next) => {
     const {authorization} = req.headers;
+    req.access_token = authorization;
+
     if (authorization) {
         try {
             const {userId} = jwt.verify(authorization, "demo_secret")
             const {customerId} = jwt.verify(authorization, "demo_secret")
             req.customerId = customerId;
             req.userId = userId;
+
         } catch (e) {
             req.customerId = null;
             req.userId = null;

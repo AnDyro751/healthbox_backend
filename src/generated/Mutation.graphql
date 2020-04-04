@@ -1,8 +1,16 @@
 type Mutation{
     signUpUser(data: UserCreateInput!): SignInUserPayload
-
+    addLineItem(data: AddLineItemInput!): AddLineItemPayload
 }
 
+
+input AddLineItemInput{
+    product_id: String!
+}
+
+type AddLineItemPayload{
+    response: Boolean!
+}
 
 input UserSignInInput{
     email: String!

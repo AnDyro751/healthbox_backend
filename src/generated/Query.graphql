@@ -1,0 +1,10 @@
+type Query{
+    currentCustomer: CurrentCustomerPayload!
+}
+#signUpUser(data: UserCreateInput!): SignInUserPayload
+#
+
+type CurrentCustomerPayload{
+    customer: Customer!
+    token: String!
+}
