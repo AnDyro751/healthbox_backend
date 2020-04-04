@@ -9,7 +9,8 @@ input AddLineItemInput{
 }
 
 type AddLineItemPayload{
-    response: Boolean!
+    product: Product!
+    lineItemCount: Int!
 }
 
 input UserSignInInput{
