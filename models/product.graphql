@@ -1,0 +1,15 @@
+type Product {
+    id: ID! @id
+    name: String!
+    price: Float! @default(value: 10)
+    description: String!
+    size: String!
+    kind: KIND_VALUE! @default(value: ADULT)
+    max_buy: Int! @default(value: 10)
+    min_buy: Int! @default(value: 1)
+}
+
+enum KIND_VALUE{
+    ADULT,
+    CHILDREN
+}

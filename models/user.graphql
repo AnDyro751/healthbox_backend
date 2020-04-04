@@ -1,0 +1,9 @@
+type User {
+    id: ID! @id
+    name: String!
+    last_name: String!
+    is_admin: Boolean! @default(value: false)
+    password: String
+    email: String
+    cel_phone: String
+}

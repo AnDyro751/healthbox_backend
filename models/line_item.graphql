@@ -1,0 +1,14 @@
+# LINE ITEM MODEL
+# CADA QUE EL CUSTOMER AGREGA UN NUEVO PRODUCTO SE CREA O SE ACTUALIZA
+# EL LINE ITEM
+# CUSTOMER: ID: 5252817462, LINE_ITEMS: {
+# PRODUCT: RELATION <- RELACIÓN AL PRODUCTO QUE AGREGÓ
+# QUANTITY: 1 <- CANTIDAD DE PRODUCTOS QUE AGREGÓ
+#}
+
+type LineItem{
+    id: ID! @id
+    product: Product! @relation(link: INLINE, onDelete: SET_NULL)
+    quantity: Int! @default(value: 1)
+    customer: Customer
+}

@@ -1,0 +1,16 @@
+type Mutation{
+    signUpUser(data: UserCreateInput!): SignInUserPayload
+
+}
+
+
+input UserSignInInput{
+    email: String!
+    password: String!
+}
+
+
+type SignInUserPayload {
+    user: User!
+    token: String!
+}

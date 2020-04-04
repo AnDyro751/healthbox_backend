@@ -1,0 +1,16 @@
+# CUSTOMER MODEL
+# USUARIO QUE SE AGREGA AGREGA PRODUCTOS A SU CARRITO
+
+type Customer {
+    id: ID! @id
+    name: String # NOMBRE DEL CUSTOMER
+    last_name: String # APELLIDOS DEL CUSTOMER
+    email: String # EMAIL DEL CUSTOMER, NO REQUERIDO
+    address: String # DIRECCIÓN DEL CUSTOMER, NO REQUERIDO
+    postal_code: String # CODIGO POSTAL DEL CUSTOMER, NO REQUERIDO
+    city: String # CIUDAD DEL CUSTOMER, NO REQUERIDO
+    state: String # ESTADO(VIVIENDA) DEL CUSTOMER, NO REQUERIDO
+    cel_phone: String # TELÉFONO MOVIL DEL CUSTOMER, NO REQUERIDO
+    line_items: [LineItem!]! @relation(link: INLINE, onDelete: SET_NULL)
+    lienItemCount: Int! @default(value: 0)
+}
