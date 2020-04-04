@@ -264,7 +264,9 @@ export type ProductOrderByInput =
   | "max_buy_ASC"
   | "max_buy_DESC"
   | "min_buy_ASC"
-  | "min_buy_DESC";
+  | "min_buy_DESC"
+  | "discount_for_more_ASC"
+  | "discount_for_more_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -401,6 +403,14 @@ export interface ProductWhereInput {
   min_buy_lte?: Maybe<Int>;
   min_buy_gt?: Maybe<Int>;
   min_buy_gte?: Maybe<Int>;
+  discount_for_more?: Maybe<Int>;
+  discount_for_more_not?: Maybe<Int>;
+  discount_for_more_in?: Maybe<Int[] | Int>;
+  discount_for_more_not_in?: Maybe<Int[] | Int>;
+  discount_for_more_lt?: Maybe<Int>;
+  discount_for_more_lte?: Maybe<Int>;
+  discount_for_more_gt?: Maybe<Int>;
+  discount_for_more_gte?: Maybe<Int>;
   AND?: Maybe<ProductWhereInput[] | ProductWhereInput>;
 }
 
@@ -686,6 +696,7 @@ export interface ProductCreateInput {
   kind?: Maybe<KIND_VALUE>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
+  discount_for_more?: Maybe<Int>;
 }
 
 export interface CustomerUpdateInput {
@@ -749,6 +760,7 @@ export interface ProductUpdateDataInput {
   kind?: Maybe<KIND_VALUE>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
+  discount_for_more?: Maybe<Int>;
 }
 
 export interface ProductUpsertNestedInput {
@@ -880,6 +892,7 @@ export interface ProductUpdateInput {
   kind?: Maybe<KIND_VALUE>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
+  discount_for_more?: Maybe<Int>;
 }
 
 export interface ProductUpdateManyMutationInput {
@@ -890,6 +903,7 @@ export interface ProductUpdateManyMutationInput {
   kind?: Maybe<KIND_VALUE>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
+  discount_for_more?: Maybe<Int>;
 }
 
 export interface UserCreateInput {
@@ -1086,6 +1100,7 @@ export interface Product {
   kind: KIND_VALUE;
   max_buy: Int;
   min_buy: Int;
+  discount_for_more?: Int;
 }
 
 export interface ProductPromise extends Promise<Product>, Fragmentable {
@@ -1097,6 +1112,7 @@ export interface ProductPromise extends Promise<Product>, Fragmentable {
   kind: () => Promise<KIND_VALUE>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
+  discount_for_more: () => Promise<Int>;
 }
 
 export interface ProductSubscription
@@ -1110,6 +1126,7 @@ export interface ProductSubscription
   kind: () => Promise<AsyncIterator<KIND_VALUE>>;
   max_buy: () => Promise<AsyncIterator<Int>>;
   min_buy: () => Promise<AsyncIterator<Int>>;
+  discount_for_more: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface ProductNullablePromise
@@ -1123,6 +1140,7 @@ export interface ProductNullablePromise
   kind: () => Promise<KIND_VALUE>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
+  discount_for_more: () => Promise<Int>;
 }
 
 export interface CustomerConnection {
@@ -1574,6 +1592,7 @@ export interface ProductPreviousValues {
   kind: KIND_VALUE;
   max_buy: Int;
   min_buy: Int;
+  discount_for_more?: Int;
 }
 
 export interface ProductPreviousValuesPromise
@@ -1587,6 +1606,7 @@ export interface ProductPreviousValuesPromise
   kind: () => Promise<KIND_VALUE>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
+  discount_for_more: () => Promise<Int>;
 }
 
 export interface ProductPreviousValuesSubscription
@@ -1600,6 +1620,7 @@ export interface ProductPreviousValuesSubscription
   kind: () => Promise<AsyncIterator<KIND_VALUE>>;
   max_buy: () => Promise<AsyncIterator<Int>>;
   min_buy: () => Promise<AsyncIterator<Int>>;
+  discount_for_more: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface UserSubscriptionPayload {

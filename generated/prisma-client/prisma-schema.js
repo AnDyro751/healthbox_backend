@@ -557,6 +557,7 @@ type Product {
   kind: KIND_VALUE!
   max_buy: Int!
   min_buy: Int!
+  discount_for_more: Int
 }
 
 type ProductConnection {
@@ -574,6 +575,7 @@ input ProductCreateInput {
   kind: KIND_VALUE
   max_buy: Int
   min_buy: Int
+  discount_for_more: Int
 }
 
 input ProductCreateOneInput {
@@ -603,6 +605,8 @@ enum ProductOrderByInput {
   max_buy_DESC
   min_buy_ASC
   min_buy_DESC
+  discount_for_more_ASC
+  discount_for_more_DESC
 }
 
 type ProductPreviousValues {
@@ -614,6 +618,7 @@ type ProductPreviousValues {
   kind: KIND_VALUE!
   max_buy: Int!
   min_buy: Int!
+  discount_for_more: Int
 }
 
 type ProductSubscriptionPayload {
@@ -640,6 +645,7 @@ input ProductUpdateDataInput {
   kind: KIND_VALUE
   max_buy: Int
   min_buy: Int
+  discount_for_more: Int
 }
 
 input ProductUpdateInput {
@@ -650,6 +656,7 @@ input ProductUpdateInput {
   kind: KIND_VALUE
   max_buy: Int
   min_buy: Int
+  discount_for_more: Int
 }
 
 input ProductUpdateManyMutationInput {
@@ -660,6 +667,7 @@ input ProductUpdateManyMutationInput {
   kind: KIND_VALUE
   max_buy: Int
   min_buy: Int
+  discount_for_more: Int
 }
 
 input ProductUpdateOneRequiredInput {
@@ -759,6 +767,14 @@ input ProductWhereInput {
   min_buy_lte: Int
   min_buy_gt: Int
   min_buy_gte: Int
+  discount_for_more: Int
+  discount_for_more_not: Int
+  discount_for_more_in: [Int!]
+  discount_for_more_not_in: [Int!]
+  discount_for_more_lt: Int
+  discount_for_more_lte: Int
+  discount_for_more_gt: Int
+  discount_for_more_gte: Int
   AND: [ProductWhereInput!]
 }
 
