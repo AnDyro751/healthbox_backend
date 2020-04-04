@@ -5,6 +5,7 @@
     "start": "SET NODE_ENV=production && node src/index.js"
   },
   "dependencies": {
+    "@now/node-server": "^0.7.4-canary.9",
     "apollo-server-core": "^2.11.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.4",
