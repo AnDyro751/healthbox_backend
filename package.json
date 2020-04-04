@@ -2,7 +2,7 @@
   "name": "healthbox_backend",
   "version": "1.0.0",
   "scripts": {
-    "prod": "node src/index.js"
+    "start": "SET NODE_ENV=production && node src/index.js"
   },
   "dependencies": {
     "apollo-server-core": "^2.11.0",
