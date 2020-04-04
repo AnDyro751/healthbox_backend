@@ -1,5 +1,5 @@
 {
-  "name": "healthbox backend",
+  "name": "healthbox_backend",
   "version": "1.0.0",
   "dependencies": {
     "apollo-server-core": "^2.11.0",
