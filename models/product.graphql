@@ -7,6 +7,7 @@ type Product {
     kind: KIND_VALUE! @default(value: ADULT)
     max_buy: Int! @default(value: 10)
     min_buy: Int! @default(value: 1)
+    discount_for_more: @default(value: 7)
 }
 
 enum KIND_VALUE{
