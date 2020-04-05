@@ -10,6 +10,17 @@ module.exports = async (prisma, args, request) => {
     if (!customer) {
         return new AuthenticationError("Ha ocurrido un error, intenta de nuevo")
     }
+    const products = await prisma.lineItems({
+        where: {
+            customer: {
+                id: customerId,
+            },
+        }
+    });
+    if (products.length <= 0) {
+        return new Error("Aún no tienes productos en el carrito")
+    }
+    console.log("PROD", products)
     const lastPendingCheckout = await prisma.checkouts({
         where: {
             customer: {
