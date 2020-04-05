@@ -621,9 +621,9 @@ enum KIND_VALUE {
 
 type LineItem {
   id: ID!
-  product: Product!
   quantity: Int!
   customer: Customer
+  product: Product!
 }
 
 type LineItemConnection {
@@ -634,9 +634,9 @@ type LineItemConnection {
 
 input LineItemCreateInput {
   id: ID
-  product: ProductCreateOneInput!
   quantity: Int
   customer: CustomerCreateOneWithoutLine_itemsInput
+  product: ProductCreateOneWithoutLine_itemsInput!
 }
 
 input LineItemCreateManyWithoutCustomerInput {
@@ -644,10 +644,21 @@ input LineItemCreateManyWithoutCustomerInput {
   connect: [LineItemWhereUniqueInput!]
 }
 
+input LineItemCreateManyWithoutProductInput {
+  create: [LineItemCreateWithoutProductInput!]
+  connect: [LineItemWhereUniqueInput!]
+}
+
 input LineItemCreateWithoutCustomerInput {
   id: ID
-  product: ProductCreateOneInput!
   quantity: Int
+  product: ProductCreateOneWithoutLine_itemsInput!
+}
+
+input LineItemCreateWithoutProductInput {
+  id: ID
+  quantity: Int
+  customer: CustomerCreateOneWithoutLine_itemsInput
 }
 
 type LineItemEdge {
@@ -712,9 +723,9 @@ input LineItemSubscriptionWhereInput {
 }
 
 input LineItemUpdateInput {
-  product: ProductUpdateOneRequiredInput
   quantity: Int
   customer: CustomerUpdateOneWithoutLine_itemsInput
+  product: ProductUpdateOneRequiredWithoutLine_itemsInput
 }
 
 input LineItemUpdateManyDataInput {
@@ -737,14 +748,31 @@ input LineItemUpdateManyWithoutCustomerInput {
   updateMany: [LineItemUpdateManyWithWhereNestedInput!]
 }
 
+input LineItemUpdateManyWithoutProductInput {
+  create: [LineItemCreateWithoutProductInput!]
+  delete: [LineItemWhereUniqueInput!]
+  connect: [LineItemWhereUniqueInput!]
+  set: [LineItemWhereUniqueInput!]
+  disconnect: [LineItemWhereUniqueInput!]
+  update: [LineItemUpdateWithWhereUniqueWithoutProductInput!]
+  upsert: [LineItemUpsertWithWhereUniqueWithoutProductInput!]
+  deleteMany: [LineItemScalarWhereInput!]
+  updateMany: [LineItemUpdateManyWithWhereNestedInput!]
+}
+
 input LineItemUpdateManyWithWhereNestedInput {
   where: LineItemScalarWhereInput!
   data: LineItemUpdateManyDataInput!
 }
 
 input LineItemUpdateWithoutCustomerDataInput {
-  product: ProductUpdateOneRequiredInput
   quantity: Int
+  product: ProductUpdateOneRequiredWithoutLine_itemsInput
+}
+
+input LineItemUpdateWithoutProductDataInput {
+  quantity: Int
+  customer: CustomerUpdateOneWithoutLine_itemsInput
 }
 
 input LineItemUpdateWithWhereUniqueWithoutCustomerInput {
@@ -752,10 +780,21 @@ input LineItemUpdateWithWhereUniqueWithoutCustomerInput {
   data: LineItemUpdateWithoutCustomerDataInput!
 }
 
+input LineItemUpdateWithWhereUniqueWithoutProductInput {
+  where: LineItemWhereUniqueInput!
+  data: LineItemUpdateWithoutProductDataInput!
+}
+
 input LineItemUpsertWithWhereUniqueWithoutCustomerInput {
   where: LineItemWhereUniqueInput!
   update: LineItemUpdateWithoutCustomerDataInput!
   create: LineItemCreateWithoutCustomerInput!
+}
+
+input LineItemUpsertWithWhereUniqueWithoutProductInput {
+  where: LineItemWhereUniqueInput!
+  update: LineItemUpdateWithoutProductDataInput!
+  create: LineItemCreateWithoutProductInput!
 }
 
 input LineItemWhereInput {
@@ -773,7 +812,6 @@ input LineItemWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  product: ProductWhereInput
   quantity: Int
   quantity_not: Int
   quantity_in: [Int!]
@@ -783,6 +821,7 @@ input LineItemWhereInput {
   quantity_gt: Int
   quantity_gte: Int
   customer: CustomerWhereInput
+  product: ProductWhereInput
   AND: [LineItemWhereInput!]
 }
 
@@ -852,6 +891,7 @@ type Product {
   max_buy: Int!
   min_buy: Int!
   discount_for_more: Int
+  line_items(where: LineItemWhereInput, orderBy: LineItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LineItem!]
 }
 
 type ProductConnection {
@@ -870,11 +910,24 @@ input ProductCreateInput {
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
+  line_items: LineItemCreateManyWithoutProductInput
 }
 
-input ProductCreateOneInput {
-  create: ProductCreateInput
+input ProductCreateOneWithoutLine_itemsInput {
+  create: ProductCreateWithoutLine_itemsInput
   connect: ProductWhereUniqueInput
+}
+
+input ProductCreateWithoutLine_itemsInput {
+  id: ID
+  name: String!
+  price: Float
+  size: String
+  image: String!
+  kind: KIND_VALUE
+  max_buy: Int
+  min_buy: Int
+  discount_for_more: Int
 }
 
 type ProductEdge {
@@ -931,17 +984,6 @@ input ProductSubscriptionWhereInput {
   AND: [ProductSubscriptionWhereInput!]
 }
 
-input ProductUpdateDataInput {
-  name: String
-  price: Float
-  size: String
-  image: String
-  kind: KIND_VALUE
-  max_buy: Int
-  min_buy: Int
-  discount_for_more: Int
-}
-
 input ProductUpdateInput {
   name: String
   price: Float
@@ -951,6 +993,7 @@ input ProductUpdateInput {
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
+  line_items: LineItemUpdateManyWithoutProductInput
 }
 
 input ProductUpdateManyMutationInput {
@@ -964,16 +1007,27 @@ input ProductUpdateManyMutationInput {
   discount_for_more: Int
 }
 
-input ProductUpdateOneRequiredInput {
-  create: ProductCreateInput
-  update: ProductUpdateDataInput
-  upsert: ProductUpsertNestedInput
+input ProductUpdateOneRequiredWithoutLine_itemsInput {
+  create: ProductCreateWithoutLine_itemsInput
+  update: ProductUpdateWithoutLine_itemsDataInput
+  upsert: ProductUpsertWithoutLine_itemsInput
   connect: ProductWhereUniqueInput
 }
 
-input ProductUpsertNestedInput {
-  update: ProductUpdateDataInput!
-  create: ProductCreateInput!
+input ProductUpdateWithoutLine_itemsDataInput {
+  name: String
+  price: Float
+  size: String
+  image: String
+  kind: KIND_VALUE
+  max_buy: Int
+  min_buy: Int
+  discount_for_more: Int
+}
+
+input ProductUpsertWithoutLine_itemsInput {
+  update: ProductUpdateWithoutLine_itemsDataInput!
+  create: ProductCreateWithoutLine_itemsInput!
 }
 
 input ProductWhereInput {
@@ -1069,6 +1123,7 @@ input ProductWhereInput {
   discount_for_more_lte: Int
   discount_for_more_gt: Int
   discount_for_more_gte: Int
+  line_items_some: LineItemWhereInput
   AND: [ProductWhereInput!]
 }
 

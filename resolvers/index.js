@@ -40,8 +40,10 @@ module.exports.resolvers = {
         },
     },
     LineItem: {
-        product: (parent, args) => {
-            return prisma.lineItem({id: parent.id}).product()
+        product: async (parent, args) => {
+            const product = await prisma.lineItem({id: parent.id}).product()
+            console.log("PROD",product)
+            return product
         }
     },
 

@@ -10,6 +10,8 @@ module.exports = async (prisma, args, request) => {
     if (!customer) {
         return new AuthenticationError("Ha ocurrido un error, intenta de nuevo")
     }
+    let all_products = []
+
     const line_items = await prisma.lineItems({
         where: {
             customer: {
@@ -17,24 +19,22 @@ module.exports = async (prisma, args, request) => {
             },
         }
     });
+
+
     if (line_items.length <= 0) {
         return new Error("Aún no tienes productos en el carrito")
     }
-    let all_products = []
-    //     [{
-    //     name: 'T-shirt',
-    //     description: 'Comfortable cotton t-shirt',
-    //     images: ['https://example.com/t-shirt.png'],
-    //     amount: 5000,
-    //     currency: 'mxn',
-    //     quantity: 1,
-    // }]
-    line_items.map((pr)=>{
+
+    line_items.map(async (li) => {
+        const product = await prisma.lineItem({id: li.id}).product()
         all_products.push({
-            name: pr.product()
+            name: product.name,
+            images: [product.image],
+            amount: product.price * 100,
+            quantity: li.quantity,
+            currency: "mxn"
         })
     })
-    console.log("PROD", products)
     const lastPendingCheckout = await prisma.checkouts({
         where: {
             customer: {
@@ -45,6 +45,7 @@ module.exports = async (prisma, args, request) => {
     })
 
     if (lastPendingCheckout.length > 0) {
+        console.log("LA", lastPendingCheckout[0])
         // RETORNAMOS EL CHECKOUT QUE YA SE HA CREADO
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -55,7 +56,7 @@ module.exports = async (prisma, args, request) => {
         return {checkout: lastPendingCheckout[0], stripe_token: session.id}
 
     } else {
-        const new_checkout = prisma.createCheckout({
+        const new_checkout = await prisma.createCheckout({
             uuid: v4(),
             customer: {
                 connect: {
@@ -63,16 +64,10 @@ module.exports = async (prisma, args, request) => {
                 }
             }
         })
+        console.log("A", new_checkout)
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
-            line_items: [{
-                name: 'T-shirt',
-                description: 'Comfortable cotton t-shirt',
-                images: ['https://example.com/t-shirt.png'],
-                amount: 5000,
-                currency: 'mxn',
-                quantity: 1,
-            }],
+            line_items: all_products,
             success_url: `https://example.com/success/${new_checkout.uuid}`,
             cancel_url: 'https://example.com/cancel',
         });

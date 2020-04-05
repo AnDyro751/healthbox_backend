@@ -257,9 +257,9 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type KIND_VALUE = "ADULT" | "CHILDREN";
-
 export type STATUS = "PENDING" | "SUCCESS" | "ERROR";
+
+export type KIND_VALUE = "ADULT" | "CHILDREN";
 
 export type LineItemOrderByInput =
   | "id_ASC"
@@ -357,7 +357,6 @@ export interface LineItemWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  product?: Maybe<ProductWhereInput>;
   quantity?: Maybe<Int>;
   quantity_not?: Maybe<Int>;
   quantity_in?: Maybe<Int[] | Int>;
@@ -367,103 +366,8 @@ export interface LineItemWhereInput {
   quantity_gt?: Maybe<Int>;
   quantity_gte?: Maybe<Int>;
   customer?: Maybe<CustomerWhereInput>;
+  product?: Maybe<ProductWhereInput>;
   AND?: Maybe<LineItemWhereInput[] | LineItemWhereInput>;
-}
-
-export interface ProductWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  price?: Maybe<Float>;
-  price_not?: Maybe<Float>;
-  price_in?: Maybe<Float[] | Float>;
-  price_not_in?: Maybe<Float[] | Float>;
-  price_lt?: Maybe<Float>;
-  price_lte?: Maybe<Float>;
-  price_gt?: Maybe<Float>;
-  price_gte?: Maybe<Float>;
-  size?: Maybe<String>;
-  size_not?: Maybe<String>;
-  size_in?: Maybe<String[] | String>;
-  size_not_in?: Maybe<String[] | String>;
-  size_lt?: Maybe<String>;
-  size_lte?: Maybe<String>;
-  size_gt?: Maybe<String>;
-  size_gte?: Maybe<String>;
-  size_contains?: Maybe<String>;
-  size_not_contains?: Maybe<String>;
-  size_starts_with?: Maybe<String>;
-  size_not_starts_with?: Maybe<String>;
-  size_ends_with?: Maybe<String>;
-  size_not_ends_with?: Maybe<String>;
-  image?: Maybe<String>;
-  image_not?: Maybe<String>;
-  image_in?: Maybe<String[] | String>;
-  image_not_in?: Maybe<String[] | String>;
-  image_lt?: Maybe<String>;
-  image_lte?: Maybe<String>;
-  image_gt?: Maybe<String>;
-  image_gte?: Maybe<String>;
-  image_contains?: Maybe<String>;
-  image_not_contains?: Maybe<String>;
-  image_starts_with?: Maybe<String>;
-  image_not_starts_with?: Maybe<String>;
-  image_ends_with?: Maybe<String>;
-  image_not_ends_with?: Maybe<String>;
-  kind?: Maybe<KIND_VALUE>;
-  kind_not?: Maybe<KIND_VALUE>;
-  kind_in?: Maybe<KIND_VALUE[] | KIND_VALUE>;
-  kind_not_in?: Maybe<KIND_VALUE[] | KIND_VALUE>;
-  max_buy?: Maybe<Int>;
-  max_buy_not?: Maybe<Int>;
-  max_buy_in?: Maybe<Int[] | Int>;
-  max_buy_not_in?: Maybe<Int[] | Int>;
-  max_buy_lt?: Maybe<Int>;
-  max_buy_lte?: Maybe<Int>;
-  max_buy_gt?: Maybe<Int>;
-  max_buy_gte?: Maybe<Int>;
-  min_buy?: Maybe<Int>;
-  min_buy_not?: Maybe<Int>;
-  min_buy_in?: Maybe<Int[] | Int>;
-  min_buy_not_in?: Maybe<Int[] | Int>;
-  min_buy_lt?: Maybe<Int>;
-  min_buy_lte?: Maybe<Int>;
-  min_buy_gt?: Maybe<Int>;
-  min_buy_gte?: Maybe<Int>;
-  discount_for_more?: Maybe<Int>;
-  discount_for_more_not?: Maybe<Int>;
-  discount_for_more_in?: Maybe<Int[] | Int>;
-  discount_for_more_not_in?: Maybe<Int[] | Int>;
-  discount_for_more_lt?: Maybe<Int>;
-  discount_for_more_lte?: Maybe<Int>;
-  discount_for_more_gt?: Maybe<Int>;
-  discount_for_more_gte?: Maybe<Int>;
-  AND?: Maybe<ProductWhereInput[] | ProductWhereInput>;
 }
 
 export interface CustomerWhereInput {
@@ -657,6 +561,103 @@ export interface CheckoutWhereInput {
   AND?: Maybe<CheckoutWhereInput[] | CheckoutWhereInput>;
 }
 
+export interface ProductWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  price?: Maybe<Float>;
+  price_not?: Maybe<Float>;
+  price_in?: Maybe<Float[] | Float>;
+  price_not_in?: Maybe<Float[] | Float>;
+  price_lt?: Maybe<Float>;
+  price_lte?: Maybe<Float>;
+  price_gt?: Maybe<Float>;
+  price_gte?: Maybe<Float>;
+  size?: Maybe<String>;
+  size_not?: Maybe<String>;
+  size_in?: Maybe<String[] | String>;
+  size_not_in?: Maybe<String[] | String>;
+  size_lt?: Maybe<String>;
+  size_lte?: Maybe<String>;
+  size_gt?: Maybe<String>;
+  size_gte?: Maybe<String>;
+  size_contains?: Maybe<String>;
+  size_not_contains?: Maybe<String>;
+  size_starts_with?: Maybe<String>;
+  size_not_starts_with?: Maybe<String>;
+  size_ends_with?: Maybe<String>;
+  size_not_ends_with?: Maybe<String>;
+  image?: Maybe<String>;
+  image_not?: Maybe<String>;
+  image_in?: Maybe<String[] | String>;
+  image_not_in?: Maybe<String[] | String>;
+  image_lt?: Maybe<String>;
+  image_lte?: Maybe<String>;
+  image_gt?: Maybe<String>;
+  image_gte?: Maybe<String>;
+  image_contains?: Maybe<String>;
+  image_not_contains?: Maybe<String>;
+  image_starts_with?: Maybe<String>;
+  image_not_starts_with?: Maybe<String>;
+  image_ends_with?: Maybe<String>;
+  image_not_ends_with?: Maybe<String>;
+  kind?: Maybe<KIND_VALUE>;
+  kind_not?: Maybe<KIND_VALUE>;
+  kind_in?: Maybe<KIND_VALUE[] | KIND_VALUE>;
+  kind_not_in?: Maybe<KIND_VALUE[] | KIND_VALUE>;
+  max_buy?: Maybe<Int>;
+  max_buy_not?: Maybe<Int>;
+  max_buy_in?: Maybe<Int[] | Int>;
+  max_buy_not_in?: Maybe<Int[] | Int>;
+  max_buy_lt?: Maybe<Int>;
+  max_buy_lte?: Maybe<Int>;
+  max_buy_gt?: Maybe<Int>;
+  max_buy_gte?: Maybe<Int>;
+  min_buy?: Maybe<Int>;
+  min_buy_not?: Maybe<Int>;
+  min_buy_in?: Maybe<Int[] | Int>;
+  min_buy_not_in?: Maybe<Int[] | Int>;
+  min_buy_lt?: Maybe<Int>;
+  min_buy_lte?: Maybe<Int>;
+  min_buy_gt?: Maybe<Int>;
+  min_buy_gte?: Maybe<Int>;
+  discount_for_more?: Maybe<Int>;
+  discount_for_more_not?: Maybe<Int>;
+  discount_for_more_in?: Maybe<Int[] | Int>;
+  discount_for_more_not_in?: Maybe<Int[] | Int>;
+  discount_for_more_lt?: Maybe<Int>;
+  discount_for_more_lte?: Maybe<Int>;
+  discount_for_more_gt?: Maybe<Int>;
+  discount_for_more_gte?: Maybe<Int>;
+  line_items_some?: Maybe<LineItemWhereInput>;
+  AND?: Maybe<ProductWhereInput[] | ProductWhereInput>;
+}
+
 export type CustomerWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
@@ -799,16 +800,16 @@ export interface LineItemCreateManyWithoutCustomerInput {
 
 export interface LineItemCreateWithoutCustomerInput {
   id?: Maybe<ID_Input>;
-  product: ProductCreateOneInput;
   quantity?: Maybe<Int>;
+  product: ProductCreateOneWithoutLine_itemsInput;
 }
 
-export interface ProductCreateOneInput {
-  create?: Maybe<ProductCreateInput>;
+export interface ProductCreateOneWithoutLine_itemsInput {
+  create?: Maybe<ProductCreateWithoutLine_itemsInput>;
   connect?: Maybe<ProductWhereUniqueInput>;
 }
 
-export interface ProductCreateInput {
+export interface ProductCreateWithoutLine_itemsInput {
   id?: Maybe<ID_Input>;
   name: String;
   price?: Maybe<Float>;
@@ -876,18 +877,18 @@ export interface LineItemUpdateWithWhereUniqueWithoutCustomerInput {
 }
 
 export interface LineItemUpdateWithoutCustomerDataInput {
-  product?: Maybe<ProductUpdateOneRequiredInput>;
   quantity?: Maybe<Int>;
+  product?: Maybe<ProductUpdateOneRequiredWithoutLine_itemsInput>;
 }
 
-export interface ProductUpdateOneRequiredInput {
-  create?: Maybe<ProductCreateInput>;
-  update?: Maybe<ProductUpdateDataInput>;
-  upsert?: Maybe<ProductUpsertNestedInput>;
+export interface ProductUpdateOneRequiredWithoutLine_itemsInput {
+  create?: Maybe<ProductCreateWithoutLine_itemsInput>;
+  update?: Maybe<ProductUpdateWithoutLine_itemsDataInput>;
+  upsert?: Maybe<ProductUpsertWithoutLine_itemsInput>;
   connect?: Maybe<ProductWhereUniqueInput>;
 }
 
-export interface ProductUpdateDataInput {
+export interface ProductUpdateWithoutLine_itemsDataInput {
   name?: Maybe<String>;
   price?: Maybe<Float>;
   size?: Maybe<String>;
@@ -898,9 +899,9 @@ export interface ProductUpdateDataInput {
   discount_for_more?: Maybe<Int>;
 }
 
-export interface ProductUpsertNestedInput {
-  update: ProductUpdateDataInput;
-  create: ProductCreateInput;
+export interface ProductUpsertWithoutLine_itemsInput {
+  update: ProductUpdateWithoutLine_itemsDataInput;
+  create: ProductCreateWithoutLine_itemsInput;
 }
 
 export interface LineItemUpsertWithWhereUniqueWithoutCustomerInput {
@@ -1117,9 +1118,9 @@ export interface CustomerUpdateManyMutationInput {
 
 export interface LineItemCreateInput {
   id?: Maybe<ID_Input>;
-  product: ProductCreateOneInput;
   quantity?: Maybe<Int>;
   customer?: Maybe<CustomerCreateOneWithoutLine_itemsInput>;
+  product: ProductCreateOneWithoutLine_itemsInput;
 }
 
 export interface CustomerCreateOneWithoutLine_itemsInput {
@@ -1142,9 +1143,9 @@ export interface CustomerCreateWithoutLine_itemsInput {
 }
 
 export interface LineItemUpdateInput {
-  product?: Maybe<ProductUpdateOneRequiredInput>;
   quantity?: Maybe<Int>;
   customer?: Maybe<CustomerUpdateOneWithoutLine_itemsInput>;
+  product?: Maybe<ProductUpdateOneRequiredWithoutLine_itemsInput>;
 }
 
 export interface CustomerUpdateOneWithoutLine_itemsInput {
@@ -1178,6 +1179,32 @@ export interface LineItemUpdateManyMutationInput {
   quantity?: Maybe<Int>;
 }
 
+export interface ProductCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  price?: Maybe<Float>;
+  size?: Maybe<String>;
+  image: String;
+  kind?: Maybe<KIND_VALUE>;
+  max_buy?: Maybe<Int>;
+  min_buy?: Maybe<Int>;
+  discount_for_more?: Maybe<Int>;
+  line_items?: Maybe<LineItemCreateManyWithoutProductInput>;
+}
+
+export interface LineItemCreateManyWithoutProductInput {
+  create?: Maybe<
+    LineItemCreateWithoutProductInput[] | LineItemCreateWithoutProductInput
+  >;
+  connect?: Maybe<LineItemWhereUniqueInput[] | LineItemWhereUniqueInput>;
+}
+
+export interface LineItemCreateWithoutProductInput {
+  id?: Maybe<ID_Input>;
+  quantity?: Maybe<Int>;
+  customer?: Maybe<CustomerCreateOneWithoutLine_itemsInput>;
+}
+
 export interface ProductUpdateInput {
   name?: Maybe<String>;
   price?: Maybe<Float>;
@@ -1187,6 +1214,46 @@ export interface ProductUpdateInput {
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
   discount_for_more?: Maybe<Int>;
+  line_items?: Maybe<LineItemUpdateManyWithoutProductInput>;
+}
+
+export interface LineItemUpdateManyWithoutProductInput {
+  create?: Maybe<
+    LineItemCreateWithoutProductInput[] | LineItemCreateWithoutProductInput
+  >;
+  delete?: Maybe<LineItemWhereUniqueInput[] | LineItemWhereUniqueInput>;
+  connect?: Maybe<LineItemWhereUniqueInput[] | LineItemWhereUniqueInput>;
+  set?: Maybe<LineItemWhereUniqueInput[] | LineItemWhereUniqueInput>;
+  disconnect?: Maybe<LineItemWhereUniqueInput[] | LineItemWhereUniqueInput>;
+  update?: Maybe<
+    | LineItemUpdateWithWhereUniqueWithoutProductInput[]
+    | LineItemUpdateWithWhereUniqueWithoutProductInput
+  >;
+  upsert?: Maybe<
+    | LineItemUpsertWithWhereUniqueWithoutProductInput[]
+    | LineItemUpsertWithWhereUniqueWithoutProductInput
+  >;
+  deleteMany?: Maybe<LineItemScalarWhereInput[] | LineItemScalarWhereInput>;
+  updateMany?: Maybe<
+    | LineItemUpdateManyWithWhereNestedInput[]
+    | LineItemUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface LineItemUpdateWithWhereUniqueWithoutProductInput {
+  where: LineItemWhereUniqueInput;
+  data: LineItemUpdateWithoutProductDataInput;
+}
+
+export interface LineItemUpdateWithoutProductDataInput {
+  quantity?: Maybe<Int>;
+  customer?: Maybe<CustomerUpdateOneWithoutLine_itemsInput>;
+}
+
+export interface LineItemUpsertWithWhereUniqueWithoutProductInput {
+  where: LineItemWhereUniqueInput;
+  update: LineItemUpdateWithoutProductDataInput;
+  create: LineItemCreateWithoutProductInput;
 }
 
 export interface ProductUpdateManyMutationInput {
@@ -1435,27 +1502,27 @@ export interface LineItem {
 
 export interface LineItemPromise extends Promise<LineItem>, Fragmentable {
   id: () => Promise<ID_Output>;
-  product: <T = ProductPromise>() => T;
   quantity: () => Promise<Int>;
   customer: <T = CustomerPromise>() => T;
+  product: <T = ProductPromise>() => T;
 }
 
 export interface LineItemSubscription
   extends Promise<AsyncIterator<LineItem>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  product: <T = ProductSubscription>() => T;
   quantity: () => Promise<AsyncIterator<Int>>;
   customer: <T = CustomerSubscription>() => T;
+  product: <T = ProductSubscription>() => T;
 }
 
 export interface LineItemNullablePromise
   extends Promise<LineItem | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  product: <T = ProductPromise>() => T;
   quantity: () => Promise<Int>;
   customer: <T = CustomerPromise>() => T;
+  product: <T = ProductPromise>() => T;
 }
 
 export interface Product {
@@ -1480,6 +1547,15 @@ export interface ProductPromise extends Promise<Product>, Fragmentable {
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
   discount_for_more: () => Promise<Int>;
+  line_items: <T = FragmentableArray<LineItem>>(args?: {
+    where?: LineItemWhereInput;
+    orderBy?: LineItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface ProductSubscription
@@ -1494,6 +1570,15 @@ export interface ProductSubscription
   max_buy: () => Promise<AsyncIterator<Int>>;
   min_buy: () => Promise<AsyncIterator<Int>>;
   discount_for_more: () => Promise<AsyncIterator<Int>>;
+  line_items: <T = Promise<AsyncIterator<LineItemSubscription>>>(args?: {
+    where?: LineItemWhereInput;
+    orderBy?: LineItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface ProductNullablePromise
@@ -1508,6 +1593,15 @@ export interface ProductNullablePromise
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
   discount_for_more: () => Promise<Int>;
+  line_items: <T = FragmentableArray<LineItem>>(args?: {
+    where?: LineItemWhereInput;
+    orderBy?: LineItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface CheckoutConnection {
@@ -2167,14 +2261,14 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-*/
-export type Float = number;
-
-/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+*/
+export type Float = number;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.

@@ -5,10 +5,12 @@
 # PRODUCT: RELATION <- RELACIÓN AL PRODUCTO QUE AGREGÓ
 # QUANTITY: 1 <- CANTIDAD DE PRODUCTOS QUE AGREGÓ
 #}
+#    @relation(link: INLINE, onDelete: SET_NULL)
+
 
 type LineItem{
     id: ID! @id
-    product: Product! @relation(link: INLINE, onDelete: SET_NULL)
     quantity: Int! @default(value: 1)
     customer: Customer
+    product: Product!
 }
