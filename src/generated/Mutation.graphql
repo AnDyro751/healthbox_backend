@@ -16,6 +16,7 @@ input UserSignInInput{
 type CurrentCheckoutPayload{
     #    VAMOS A RETORNAR EL ULTIMO CHECKOUT CON ESTADO PENDING
     checkout: Checkout!
+    stripe_token: String!
 }
 
 type AddLineItemPayload{
