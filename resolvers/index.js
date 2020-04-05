@@ -71,6 +71,9 @@ module.exports.resolvers = {
             });
             return prisma.deleteProduct({...args.where})
         },
+        updateProduct: async (_, args) => {
+            await prisma.updateProduct(args)
+        },
         // CUSTOMERS
         createCustomer: (_, args, ctx) => {
             return prisma.createCustomer({...args.data})
