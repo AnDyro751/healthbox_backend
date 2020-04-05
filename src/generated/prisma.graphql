@@ -25,6 +25,7 @@ type BatchPayload {
 type Checkout {
   id: ID!
   uuid: String!
+  customer: Customer!
   status: STATUS!
   data_message: String
 }
@@ -38,13 +39,21 @@ type CheckoutConnection {
 input CheckoutCreateInput {
   id: ID
   uuid: String!
+  customer: CustomerCreateOneWithoutCheckoutsInput!
   status: STATUS
   data_message: String
 }
 
-input CheckoutCreateManyInput {
-  create: [CheckoutCreateInput!]
+input CheckoutCreateManyWithoutCustomerInput {
+  create: [CheckoutCreateWithoutCustomerInput!]
   connect: [CheckoutWhereUniqueInput!]
+}
+
+input CheckoutCreateWithoutCustomerInput {
+  id: ID
+  uuid: String!
+  status: STATUS
+  data_message: String
 }
 
 type CheckoutEdge {
@@ -138,14 +147,9 @@ input CheckoutSubscriptionWhereInput {
   AND: [CheckoutSubscriptionWhereInput!]
 }
 
-input CheckoutUpdateDataInput {
-  uuid: String
-  status: STATUS
-  data_message: String
-}
-
 input CheckoutUpdateInput {
   uuid: String
+  customer: CustomerUpdateOneRequiredWithoutCheckoutsInput
   status: STATUS
   data_message: String
 }
@@ -156,22 +160,22 @@ input CheckoutUpdateManyDataInput {
   data_message: String
 }
 
-input CheckoutUpdateManyInput {
-  create: [CheckoutCreateInput!]
-  update: [CheckoutUpdateWithWhereUniqueNestedInput!]
-  upsert: [CheckoutUpsertWithWhereUniqueNestedInput!]
-  delete: [CheckoutWhereUniqueInput!]
-  connect: [CheckoutWhereUniqueInput!]
-  set: [CheckoutWhereUniqueInput!]
-  disconnect: [CheckoutWhereUniqueInput!]
-  deleteMany: [CheckoutScalarWhereInput!]
-  updateMany: [CheckoutUpdateManyWithWhereNestedInput!]
-}
-
 input CheckoutUpdateManyMutationInput {
   uuid: String
   status: STATUS
   data_message: String
+}
+
+input CheckoutUpdateManyWithoutCustomerInput {
+  create: [CheckoutCreateWithoutCustomerInput!]
+  delete: [CheckoutWhereUniqueInput!]
+  connect: [CheckoutWhereUniqueInput!]
+  set: [CheckoutWhereUniqueInput!]
+  disconnect: [CheckoutWhereUniqueInput!]
+  update: [CheckoutUpdateWithWhereUniqueWithoutCustomerInput!]
+  upsert: [CheckoutUpsertWithWhereUniqueWithoutCustomerInput!]
+  deleteMany: [CheckoutScalarWhereInput!]
+  updateMany: [CheckoutUpdateManyWithWhereNestedInput!]
 }
 
 input CheckoutUpdateManyWithWhereNestedInput {
@@ -179,15 +183,21 @@ input CheckoutUpdateManyWithWhereNestedInput {
   data: CheckoutUpdateManyDataInput!
 }
 
-input CheckoutUpdateWithWhereUniqueNestedInput {
-  where: CheckoutWhereUniqueInput!
-  data: CheckoutUpdateDataInput!
+input CheckoutUpdateWithoutCustomerDataInput {
+  uuid: String
+  status: STATUS
+  data_message: String
 }
 
-input CheckoutUpsertWithWhereUniqueNestedInput {
+input CheckoutUpdateWithWhereUniqueWithoutCustomerInput {
   where: CheckoutWhereUniqueInput!
-  update: CheckoutUpdateDataInput!
-  create: CheckoutCreateInput!
+  data: CheckoutUpdateWithoutCustomerDataInput!
+}
+
+input CheckoutUpsertWithWhereUniqueWithoutCustomerInput {
+  where: CheckoutWhereUniqueInput!
+  update: CheckoutUpdateWithoutCustomerDataInput!
+  create: CheckoutCreateWithoutCustomerInput!
 }
 
 input CheckoutWhereInput {
@@ -219,6 +229,7 @@ input CheckoutWhereInput {
   uuid_not_starts_with: String
   uuid_ends_with: String
   uuid_not_ends_with: String
+  customer: CustomerWhereInput
   status: STATUS
   status_not: STATUS
   status_in: [STATUS!]
@@ -278,12 +289,31 @@ input CustomerCreateInput {
   cel_phone: String
   line_items: LineItemCreateManyWithoutCustomerInput
   lienItemCount: Int
-  checkouts: CheckoutCreateManyInput
+  checkouts: CheckoutCreateManyWithoutCustomerInput
+}
+
+input CustomerCreateOneWithoutCheckoutsInput {
+  create: CustomerCreateWithoutCheckoutsInput
+  connect: CustomerWhereUniqueInput
 }
 
 input CustomerCreateOneWithoutLine_itemsInput {
   create: CustomerCreateWithoutLine_itemsInput
   connect: CustomerWhereUniqueInput
+}
+
+input CustomerCreateWithoutCheckoutsInput {
+  id: ID
+  name: String
+  last_name: String
+  email: String
+  address: String
+  postal_code: String
+  city: String
+  state: String
+  cel_phone: String
+  line_items: LineItemCreateManyWithoutCustomerInput
+  lienItemCount: Int
 }
 
 input CustomerCreateWithoutLine_itemsInput {
@@ -297,7 +327,7 @@ input CustomerCreateWithoutLine_itemsInput {
   state: String
   cel_phone: String
   lienItemCount: Int
-  checkouts: CheckoutCreateManyInput
+  checkouts: CheckoutCreateManyWithoutCustomerInput
 }
 
 type CustomerEdge {
@@ -368,7 +398,7 @@ input CustomerUpdateInput {
   cel_phone: String
   line_items: LineItemUpdateManyWithoutCustomerInput
   lienItemCount: Int
-  checkouts: CheckoutUpdateManyInput
+  checkouts: CheckoutUpdateManyWithoutCustomerInput
 }
 
 input CustomerUpdateManyMutationInput {
@@ -383,6 +413,13 @@ input CustomerUpdateManyMutationInput {
   lienItemCount: Int
 }
 
+input CustomerUpdateOneRequiredWithoutCheckoutsInput {
+  create: CustomerCreateWithoutCheckoutsInput
+  update: CustomerUpdateWithoutCheckoutsDataInput
+  upsert: CustomerUpsertWithoutCheckoutsInput
+  connect: CustomerWhereUniqueInput
+}
+
 input CustomerUpdateOneWithoutLine_itemsInput {
   create: CustomerCreateWithoutLine_itemsInput
   update: CustomerUpdateWithoutLine_itemsDataInput
@@ -390,6 +427,19 @@ input CustomerUpdateOneWithoutLine_itemsInput {
   delete: Boolean
   disconnect: Boolean
   connect: CustomerWhereUniqueInput
+}
+
+input CustomerUpdateWithoutCheckoutsDataInput {
+  name: String
+  last_name: String
+  email: String
+  address: String
+  postal_code: String
+  city: String
+  state: String
+  cel_phone: String
+  line_items: LineItemUpdateManyWithoutCustomerInput
+  lienItemCount: Int
 }
 
 input CustomerUpdateWithoutLine_itemsDataInput {
@@ -402,7 +452,12 @@ input CustomerUpdateWithoutLine_itemsDataInput {
   state: String
   cel_phone: String
   lienItemCount: Int
-  checkouts: CheckoutUpdateManyInput
+  checkouts: CheckoutUpdateManyWithoutCustomerInput
+}
+
+input CustomerUpsertWithoutCheckoutsInput {
+  update: CustomerUpdateWithoutCheckoutsDataInput!
+  create: CustomerCreateWithoutCheckoutsInput!
 }
 
 input CustomerUpsertWithoutLine_itemsInput {

@@ -9,17 +9,27 @@ module.exports = async (prisma, args, request) => {
     if (!customer) {
         return new AuthenticationError("Ha ocurrido un error, intenta de nuevo")
     }
-    const lastPendingCheckout = await customer.checkouts({
+    const lastPendingCheckout = await prisma.checkouts({
         where: {
+            customer: {
+                id: customerId
+            },
             status: "PENDING"
         }
     })
     if (lastPendingCheckout.length > 0) {
         // RETORNAMOS EL CHECKOUT QUE YA SE HA CREADO
-        return lastPendingCheckout[0]
+        return {checkout: lastPendingCheckout[0]}
     } else {
-        const new_checkout = prisma.createCheckout({uuid: v4()})
-        return new_checkout
+        const new_checkout = prisma.createCheckout({
+            uuid: v4(),
+            customer:{
+                connect:{
+                    id: customerId
+                }
+            }
+        })
+        return {checkout: new_checkout}
         // CREAMOS UN NUEVO CHECKOUT
     }
 }

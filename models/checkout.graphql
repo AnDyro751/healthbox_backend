@@ -1,6 +1,7 @@
 type Checkout{
     id: ID! @id
     uuid: String! @unique
+    customer: Customer!
     status: STATUS! @default(value: PENDING)
     data_message: String
 }
