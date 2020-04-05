@@ -1,0 +1,13 @@
+type Checkout{
+    id: ID! @id
+    uuid: String! @unique
+    status: STATUS! @default(value: PENDING)
+    data_message: String
+}
+
+
+enum STATUS{
+    PENDING
+    SUCCESS
+    ERROR
+}

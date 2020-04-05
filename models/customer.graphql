@@ -11,6 +11,7 @@ type Customer {
     city: String # CIUDAD DEL CUSTOMER, NO REQUERIDO
     state: String # ESTADO(VIVIENDA) DEL CUSTOMER, NO REQUERIDO
     cel_phone: String # TELÉFONO MOVIL DEL CUSTOMER, NO REQUERIDO
-    line_items: [LineItem!]! @relation(link: INLINE, onDelete: SET_NULL)
+    line_items: [LineItem!] @relation(link: INLINE, onDelete: SET_NULL)
     lienItemCount: Int! @default(value: 0)
+    checkouts: [Checkout!] @relation(link: INLINE, onDelete: SET_NULL)
 }

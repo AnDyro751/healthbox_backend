@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  checkout: (where?: CheckoutWhereInput) => Promise<boolean>;
   customer: (where?: CustomerWhereInput) => Promise<boolean>;
   lineItem: (where?: LineItemWhereInput) => Promise<boolean>;
   product: (where?: ProductWhereInput) => Promise<boolean>;
@@ -41,6 +42,25 @@ export interface Prisma {
    * Queries
    */
 
+  checkout: (where: CheckoutWhereUniqueInput) => CheckoutNullablePromise;
+  checkouts: (args?: {
+    where?: CheckoutWhereInput;
+    orderBy?: CheckoutOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Checkout>;
+  checkoutsConnection: (args?: {
+    where?: CheckoutWhereInput;
+    orderBy?: CheckoutOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => CheckoutConnectionPromise;
   customer: (where: CustomerWhereUniqueInput) => CustomerNullablePromise;
   customers: (args?: {
     where?: CustomerWhereInput;
@@ -123,6 +143,22 @@ export interface Prisma {
    * Mutations
    */
 
+  createCheckout: (data: CheckoutCreateInput) => CheckoutPromise;
+  updateCheckout: (args: {
+    data: CheckoutUpdateInput;
+    where: CheckoutWhereUniqueInput;
+  }) => CheckoutPromise;
+  updateManyCheckouts: (args: {
+    data: CheckoutUpdateManyMutationInput;
+    where?: CheckoutWhereInput;
+  }) => BatchPayloadPromise;
+  upsertCheckout: (args: {
+    where: CheckoutWhereUniqueInput;
+    create: CheckoutCreateInput;
+    update: CheckoutUpdateInput;
+  }) => CheckoutPromise;
+  deleteCheckout: (where: CheckoutWhereUniqueInput) => CheckoutPromise;
+  deleteManyCheckouts: (where?: CheckoutWhereInput) => BatchPayloadPromise;
   createCustomer: (data: CustomerCreateInput) => CustomerPromise;
   updateCustomer: (args: {
     data: CustomerUpdateInput;
@@ -196,6 +232,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  checkout: (
+    where?: CheckoutSubscriptionWhereInput
+  ) => CheckoutSubscriptionPayloadSubscription;
   customer: (
     where?: CustomerSubscriptionWhereInput
   ) => CustomerSubscriptionPayloadSubscription;
@@ -217,6 +256,18 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
+
+export type STATUS = "PENDING" | "SUCCESS" | "ERROR";
+
+export type CheckoutOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "uuid_ASC"
+  | "uuid_DESC"
+  | "status_ASC"
+  | "status_DESC"
+  | "data_message_ASC"
+  | "data_message_DESC";
 
 export type KIND_VALUE = "ADULT" | "CHILDREN";
 
@@ -285,6 +336,61 @@ export type UserOrderByInput =
   | "cel_phone_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+
+export type CheckoutWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  uuid?: Maybe<String>;
+}>;
+
+export interface CheckoutWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  uuid?: Maybe<String>;
+  uuid_not?: Maybe<String>;
+  uuid_in?: Maybe<String[] | String>;
+  uuid_not_in?: Maybe<String[] | String>;
+  uuid_lt?: Maybe<String>;
+  uuid_lte?: Maybe<String>;
+  uuid_gt?: Maybe<String>;
+  uuid_gte?: Maybe<String>;
+  uuid_contains?: Maybe<String>;
+  uuid_not_contains?: Maybe<String>;
+  uuid_starts_with?: Maybe<String>;
+  uuid_not_starts_with?: Maybe<String>;
+  uuid_ends_with?: Maybe<String>;
+  uuid_not_ends_with?: Maybe<String>;
+  status?: Maybe<STATUS>;
+  status_not?: Maybe<STATUS>;
+  status_in?: Maybe<STATUS[] | STATUS>;
+  status_not_in?: Maybe<STATUS[] | STATUS>;
+  data_message?: Maybe<String>;
+  data_message_not?: Maybe<String>;
+  data_message_in?: Maybe<String[] | String>;
+  data_message_not_in?: Maybe<String[] | String>;
+  data_message_lt?: Maybe<String>;
+  data_message_lte?: Maybe<String>;
+  data_message_gt?: Maybe<String>;
+  data_message_gte?: Maybe<String>;
+  data_message_contains?: Maybe<String>;
+  data_message_not_contains?: Maybe<String>;
+  data_message_starts_with?: Maybe<String>;
+  data_message_not_starts_with?: Maybe<String>;
+  data_message_ends_with?: Maybe<String>;
+  data_message_not_ends_with?: Maybe<String>;
+  AND?: Maybe<CheckoutWhereInput[] | CheckoutWhereInput>;
+}
 
 export type CustomerWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
@@ -550,6 +656,7 @@ export interface CustomerWhereInput {
   lienItemCount_lte?: Maybe<Int>;
   lienItemCount_gt?: Maybe<Int>;
   lienItemCount_gte?: Maybe<Int>;
+  checkouts_some?: Maybe<CheckoutWhereInput>;
   AND?: Maybe<CustomerWhereInput[] | CustomerWhereInput>;
 }
 
@@ -655,6 +762,25 @@ export interface UserWhereInput {
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
+export interface CheckoutCreateInput {
+  id?: Maybe<ID_Input>;
+  uuid: String;
+  status?: Maybe<STATUS>;
+  data_message?: Maybe<String>;
+}
+
+export interface CheckoutUpdateInput {
+  uuid?: Maybe<String>;
+  status?: Maybe<STATUS>;
+  data_message?: Maybe<String>;
+}
+
+export interface CheckoutUpdateManyMutationInput {
+  uuid?: Maybe<String>;
+  status?: Maybe<STATUS>;
+  data_message?: Maybe<String>;
+}
+
 export interface CustomerCreateInput {
   id?: Maybe<ID_Input>;
   name?: Maybe<String>;
@@ -667,6 +793,7 @@ export interface CustomerCreateInput {
   cel_phone?: Maybe<String>;
   line_items?: Maybe<LineItemCreateManyWithoutCustomerInput>;
   lienItemCount?: Maybe<Int>;
+  checkouts?: Maybe<CheckoutCreateManyInput>;
 }
 
 export interface LineItemCreateManyWithoutCustomerInput {
@@ -699,6 +826,11 @@ export interface ProductCreateInput {
   discount_for_more?: Maybe<Int>;
 }
 
+export interface CheckoutCreateManyInput {
+  create?: Maybe<CheckoutCreateInput[] | CheckoutCreateInput>;
+  connect?: Maybe<CheckoutWhereUniqueInput[] | CheckoutWhereUniqueInput>;
+}
+
 export interface CustomerUpdateInput {
   name?: Maybe<String>;
   last_name?: Maybe<String>;
@@ -710,6 +842,7 @@ export interface CustomerUpdateInput {
   cel_phone?: Maybe<String>;
   line_items?: Maybe<LineItemUpdateManyWithoutCustomerInput>;
   lienItemCount?: Maybe<Int>;
+  checkouts?: Maybe<CheckoutUpdateManyInput>;
 }
 
 export interface LineItemUpdateManyWithoutCustomerInput {
@@ -811,6 +944,107 @@ export interface LineItemUpdateManyDataInput {
   quantity?: Maybe<Int>;
 }
 
+export interface CheckoutUpdateManyInput {
+  create?: Maybe<CheckoutCreateInput[] | CheckoutCreateInput>;
+  update?: Maybe<
+    | CheckoutUpdateWithWhereUniqueNestedInput[]
+    | CheckoutUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | CheckoutUpsertWithWhereUniqueNestedInput[]
+    | CheckoutUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<CheckoutWhereUniqueInput[] | CheckoutWhereUniqueInput>;
+  connect?: Maybe<CheckoutWhereUniqueInput[] | CheckoutWhereUniqueInput>;
+  set?: Maybe<CheckoutWhereUniqueInput[] | CheckoutWhereUniqueInput>;
+  disconnect?: Maybe<CheckoutWhereUniqueInput[] | CheckoutWhereUniqueInput>;
+  deleteMany?: Maybe<CheckoutScalarWhereInput[] | CheckoutScalarWhereInput>;
+  updateMany?: Maybe<
+    | CheckoutUpdateManyWithWhereNestedInput[]
+    | CheckoutUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface CheckoutUpdateWithWhereUniqueNestedInput {
+  where: CheckoutWhereUniqueInput;
+  data: CheckoutUpdateDataInput;
+}
+
+export interface CheckoutUpdateDataInput {
+  uuid?: Maybe<String>;
+  status?: Maybe<STATUS>;
+  data_message?: Maybe<String>;
+}
+
+export interface CheckoutUpsertWithWhereUniqueNestedInput {
+  where: CheckoutWhereUniqueInput;
+  update: CheckoutUpdateDataInput;
+  create: CheckoutCreateInput;
+}
+
+export interface CheckoutScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  uuid?: Maybe<String>;
+  uuid_not?: Maybe<String>;
+  uuid_in?: Maybe<String[] | String>;
+  uuid_not_in?: Maybe<String[] | String>;
+  uuid_lt?: Maybe<String>;
+  uuid_lte?: Maybe<String>;
+  uuid_gt?: Maybe<String>;
+  uuid_gte?: Maybe<String>;
+  uuid_contains?: Maybe<String>;
+  uuid_not_contains?: Maybe<String>;
+  uuid_starts_with?: Maybe<String>;
+  uuid_not_starts_with?: Maybe<String>;
+  uuid_ends_with?: Maybe<String>;
+  uuid_not_ends_with?: Maybe<String>;
+  status?: Maybe<STATUS>;
+  status_not?: Maybe<STATUS>;
+  status_in?: Maybe<STATUS[] | STATUS>;
+  status_not_in?: Maybe<STATUS[] | STATUS>;
+  data_message?: Maybe<String>;
+  data_message_not?: Maybe<String>;
+  data_message_in?: Maybe<String[] | String>;
+  data_message_not_in?: Maybe<String[] | String>;
+  data_message_lt?: Maybe<String>;
+  data_message_lte?: Maybe<String>;
+  data_message_gt?: Maybe<String>;
+  data_message_gte?: Maybe<String>;
+  data_message_contains?: Maybe<String>;
+  data_message_not_contains?: Maybe<String>;
+  data_message_starts_with?: Maybe<String>;
+  data_message_not_starts_with?: Maybe<String>;
+  data_message_ends_with?: Maybe<String>;
+  data_message_not_ends_with?: Maybe<String>;
+  AND?: Maybe<CheckoutScalarWhereInput[] | CheckoutScalarWhereInput>;
+  OR?: Maybe<CheckoutScalarWhereInput[] | CheckoutScalarWhereInput>;
+  NOT?: Maybe<CheckoutScalarWhereInput[] | CheckoutScalarWhereInput>;
+}
+
+export interface CheckoutUpdateManyWithWhereNestedInput {
+  where: CheckoutScalarWhereInput;
+  data: CheckoutUpdateManyDataInput;
+}
+
+export interface CheckoutUpdateManyDataInput {
+  uuid?: Maybe<String>;
+  status?: Maybe<STATUS>;
+  data_message?: Maybe<String>;
+}
+
 export interface CustomerUpdateManyMutationInput {
   name?: Maybe<String>;
   last_name?: Maybe<String>;
@@ -846,6 +1080,7 @@ export interface CustomerCreateWithoutLine_itemsInput {
   state?: Maybe<String>;
   cel_phone?: Maybe<String>;
   lienItemCount?: Maybe<Int>;
+  checkouts?: Maybe<CheckoutCreateManyInput>;
 }
 
 export interface LineItemUpdateInput {
@@ -873,6 +1108,7 @@ export interface CustomerUpdateWithoutLine_itemsDataInput {
   state?: Maybe<String>;
   cel_phone?: Maybe<String>;
   lienItemCount?: Maybe<Int>;
+  checkouts?: Maybe<CheckoutUpdateManyInput>;
 }
 
 export interface CustomerUpsertWithoutLine_itemsInput {
@@ -934,6 +1170,17 @@ export interface UserUpdateManyMutationInput {
   cel_phone?: Maybe<String>;
 }
 
+export interface CheckoutSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<CheckoutWhereInput>;
+  AND?: Maybe<
+    CheckoutSubscriptionWhereInput[] | CheckoutSubscriptionWhereInput
+  >;
+}
+
 export interface CustomerSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -978,6 +1225,117 @@ export interface NodeNode {
   id: ID_Output;
 }
 
+export interface Checkout {
+  id: ID_Output;
+  uuid: String;
+  status: STATUS;
+  data_message?: String;
+}
+
+export interface CheckoutPromise extends Promise<Checkout>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  uuid: () => Promise<String>;
+  status: () => Promise<STATUS>;
+  data_message: () => Promise<String>;
+}
+
+export interface CheckoutSubscription
+  extends Promise<AsyncIterator<Checkout>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  uuid: () => Promise<AsyncIterator<String>>;
+  status: () => Promise<AsyncIterator<STATUS>>;
+  data_message: () => Promise<AsyncIterator<String>>;
+}
+
+export interface CheckoutNullablePromise
+  extends Promise<Checkout | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  uuid: () => Promise<String>;
+  status: () => Promise<STATUS>;
+  data_message: () => Promise<String>;
+}
+
+export interface CheckoutConnection {
+  pageInfo: PageInfo;
+  edges: CheckoutEdge[];
+}
+
+export interface CheckoutConnectionPromise
+  extends Promise<CheckoutConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CheckoutEdge>>() => T;
+  aggregate: <T = AggregateCheckoutPromise>() => T;
+}
+
+export interface CheckoutConnectionSubscription
+  extends Promise<AsyncIterator<CheckoutConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CheckoutEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCheckoutSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface CheckoutEdge {
+  node: Checkout;
+  cursor: String;
+}
+
+export interface CheckoutEdgePromise
+  extends Promise<CheckoutEdge>,
+    Fragmentable {
+  node: <T = CheckoutPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface CheckoutEdgeSubscription
+  extends Promise<AsyncIterator<CheckoutEdge>>,
+    Fragmentable {
+  node: <T = CheckoutSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateCheckout {
+  count: Int;
+}
+
+export interface AggregateCheckoutPromise
+  extends Promise<AggregateCheckout>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateCheckoutSubscription
+  extends Promise<AsyncIterator<AggregateCheckout>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface Customer {
   id: ID_Output;
   name?: String;
@@ -1011,6 +1369,15 @@ export interface CustomerPromise extends Promise<Customer>, Fragmentable {
     last?: Int;
   }) => T;
   lienItemCount: () => Promise<Int>;
+  checkouts: <T = FragmentableArray<Checkout>>(args?: {
+    where?: CheckoutWhereInput;
+    orderBy?: CheckoutOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface CustomerSubscription
@@ -1035,6 +1402,15 @@ export interface CustomerSubscription
     last?: Int;
   }) => T;
   lienItemCount: () => Promise<AsyncIterator<Int>>;
+  checkouts: <T = Promise<AsyncIterator<CheckoutSubscription>>>(args?: {
+    where?: CheckoutWhereInput;
+    orderBy?: CheckoutOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface CustomerNullablePromise
@@ -1059,6 +1435,15 @@ export interface CustomerNullablePromise
     last?: Int;
   }) => T;
   lienItemCount: () => Promise<Int>;
+  checkouts: <T = FragmentableArray<Checkout>>(args?: {
+    where?: CheckoutWhereInput;
+    orderBy?: CheckoutOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface LineItem {
@@ -1162,29 +1547,6 @@ export interface CustomerConnectionSubscription
   pageInfo: <T = PageInfoSubscription>() => T;
   edges: <T = Promise<AsyncIterator<CustomerEdgeSubscription>>>() => T;
   aggregate: <T = AggregateCustomerSubscription>() => T;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface CustomerEdge {
@@ -1446,6 +1808,56 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
+export interface CheckoutSubscriptionPayload {
+  mutation: MutationType;
+  node: Checkout;
+  updatedFields: String[];
+  previousValues: CheckoutPreviousValues;
+}
+
+export interface CheckoutSubscriptionPayloadPromise
+  extends Promise<CheckoutSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = CheckoutPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = CheckoutPreviousValuesPromise>() => T;
+}
+
+export interface CheckoutSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<CheckoutSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = CheckoutSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = CheckoutPreviousValuesSubscription>() => T;
+}
+
+export interface CheckoutPreviousValues {
+  id: ID_Output;
+  uuid: String;
+  status: STATUS;
+  data_message?: String;
+}
+
+export interface CheckoutPreviousValuesPromise
+  extends Promise<CheckoutPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  uuid: () => Promise<String>;
+  status: () => Promise<STATUS>;
+  data_message: () => Promise<String>;
+}
+
+export interface CheckoutPreviousValuesSubscription
+  extends Promise<AsyncIterator<CheckoutPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  uuid: () => Promise<AsyncIterator<String>>;
+  status: () => Promise<AsyncIterator<STATUS>>;
+  data_message: () => Promise<AsyncIterator<String>>;
+}
+
 export interface CustomerSubscriptionPayload {
   mutation: MutationType;
   node: Customer;
@@ -1694,11 +2106,6 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-*/
-export type Float = number;
-
-/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
@@ -1707,6 +2114,11 @@ export type Int = number;
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+*/
+export type Float = number;
 
 export type Long = string;
 
@@ -1733,6 +2145,14 @@ export const models: Model[] = [
   },
   {
     name: "LineItem",
+    embedded: false
+  },
+  {
+    name: "Checkout",
+    embedded: false
+  },
+  {
+    name: "STATUS",
     embedded: false
   }
 ];

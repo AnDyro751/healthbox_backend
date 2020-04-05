@@ -13,5 +13,6 @@ services:
         databases:
           default:
             connector: mongo
+            host: host.docker.internal
             uri: >-
               mongodb+srv://azachii_admin:popodeperro@cluster0-87br0.gcp.mongodb.net/test?retryWrites=true&w=majority

@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateCustomer {
+/* GraphQL */ `type AggregateCheckout {
+  count: Int!
+}
+
+type AggregateCustomer {
   count: Int!
 }
 
@@ -23,6 +27,229 @@ type BatchPayload {
   count: Long!
 }
 
+type Checkout {
+  id: ID!
+  uuid: String!
+  status: STATUS!
+  data_message: String
+}
+
+type CheckoutConnection {
+  pageInfo: PageInfo!
+  edges: [CheckoutEdge]!
+  aggregate: AggregateCheckout!
+}
+
+input CheckoutCreateInput {
+  id: ID
+  uuid: String!
+  status: STATUS
+  data_message: String
+}
+
+input CheckoutCreateManyInput {
+  create: [CheckoutCreateInput!]
+  connect: [CheckoutWhereUniqueInput!]
+}
+
+type CheckoutEdge {
+  node: Checkout!
+  cursor: String!
+}
+
+enum CheckoutOrderByInput {
+  id_ASC
+  id_DESC
+  uuid_ASC
+  uuid_DESC
+  status_ASC
+  status_DESC
+  data_message_ASC
+  data_message_DESC
+}
+
+type CheckoutPreviousValues {
+  id: ID!
+  uuid: String!
+  status: STATUS!
+  data_message: String
+}
+
+input CheckoutScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  uuid: String
+  uuid_not: String
+  uuid_in: [String!]
+  uuid_not_in: [String!]
+  uuid_lt: String
+  uuid_lte: String
+  uuid_gt: String
+  uuid_gte: String
+  uuid_contains: String
+  uuid_not_contains: String
+  uuid_starts_with: String
+  uuid_not_starts_with: String
+  uuid_ends_with: String
+  uuid_not_ends_with: String
+  status: STATUS
+  status_not: STATUS
+  status_in: [STATUS!]
+  status_not_in: [STATUS!]
+  data_message: String
+  data_message_not: String
+  data_message_in: [String!]
+  data_message_not_in: [String!]
+  data_message_lt: String
+  data_message_lte: String
+  data_message_gt: String
+  data_message_gte: String
+  data_message_contains: String
+  data_message_not_contains: String
+  data_message_starts_with: String
+  data_message_not_starts_with: String
+  data_message_ends_with: String
+  data_message_not_ends_with: String
+  AND: [CheckoutScalarWhereInput!]
+  OR: [CheckoutScalarWhereInput!]
+  NOT: [CheckoutScalarWhereInput!]
+}
+
+type CheckoutSubscriptionPayload {
+  mutation: MutationType!
+  node: Checkout
+  updatedFields: [String!]
+  previousValues: CheckoutPreviousValues
+}
+
+input CheckoutSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CheckoutWhereInput
+  AND: [CheckoutSubscriptionWhereInput!]
+}
+
+input CheckoutUpdateDataInput {
+  uuid: String
+  status: STATUS
+  data_message: String
+}
+
+input CheckoutUpdateInput {
+  uuid: String
+  status: STATUS
+  data_message: String
+}
+
+input CheckoutUpdateManyDataInput {
+  uuid: String
+  status: STATUS
+  data_message: String
+}
+
+input CheckoutUpdateManyInput {
+  create: [CheckoutCreateInput!]
+  update: [CheckoutUpdateWithWhereUniqueNestedInput!]
+  upsert: [CheckoutUpsertWithWhereUniqueNestedInput!]
+  delete: [CheckoutWhereUniqueInput!]
+  connect: [CheckoutWhereUniqueInput!]
+  set: [CheckoutWhereUniqueInput!]
+  disconnect: [CheckoutWhereUniqueInput!]
+  deleteMany: [CheckoutScalarWhereInput!]
+  updateMany: [CheckoutUpdateManyWithWhereNestedInput!]
+}
+
+input CheckoutUpdateManyMutationInput {
+  uuid: String
+  status: STATUS
+  data_message: String
+}
+
+input CheckoutUpdateManyWithWhereNestedInput {
+  where: CheckoutScalarWhereInput!
+  data: CheckoutUpdateManyDataInput!
+}
+
+input CheckoutUpdateWithWhereUniqueNestedInput {
+  where: CheckoutWhereUniqueInput!
+  data: CheckoutUpdateDataInput!
+}
+
+input CheckoutUpsertWithWhereUniqueNestedInput {
+  where: CheckoutWhereUniqueInput!
+  update: CheckoutUpdateDataInput!
+  create: CheckoutCreateInput!
+}
+
+input CheckoutWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  uuid: String
+  uuid_not: String
+  uuid_in: [String!]
+  uuid_not_in: [String!]
+  uuid_lt: String
+  uuid_lte: String
+  uuid_gt: String
+  uuid_gte: String
+  uuid_contains: String
+  uuid_not_contains: String
+  uuid_starts_with: String
+  uuid_not_starts_with: String
+  uuid_ends_with: String
+  uuid_not_ends_with: String
+  status: STATUS
+  status_not: STATUS
+  status_in: [STATUS!]
+  status_not_in: [STATUS!]
+  data_message: String
+  data_message_not: String
+  data_message_in: [String!]
+  data_message_not_in: [String!]
+  data_message_lt: String
+  data_message_lte: String
+  data_message_gt: String
+  data_message_gte: String
+  data_message_contains: String
+  data_message_not_contains: String
+  data_message_starts_with: String
+  data_message_not_starts_with: String
+  data_message_ends_with: String
+  data_message_not_ends_with: String
+  AND: [CheckoutWhereInput!]
+}
+
+input CheckoutWhereUniqueInput {
+  id: ID
+  uuid: String
+}
+
 type Customer {
   id: ID!
   name: String
@@ -35,6 +262,7 @@ type Customer {
   cel_phone: String
   line_items(where: LineItemWhereInput, orderBy: LineItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LineItem!]
   lienItemCount: Int!
+  checkouts(where: CheckoutWhereInput, orderBy: CheckoutOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Checkout!]
 }
 
 type CustomerConnection {
@@ -55,6 +283,7 @@ input CustomerCreateInput {
   cel_phone: String
   line_items: LineItemCreateManyWithoutCustomerInput
   lienItemCount: Int
+  checkouts: CheckoutCreateManyInput
 }
 
 input CustomerCreateOneWithoutLine_itemsInput {
@@ -73,6 +302,7 @@ input CustomerCreateWithoutLine_itemsInput {
   state: String
   cel_phone: String
   lienItemCount: Int
+  checkouts: CheckoutCreateManyInput
 }
 
 type CustomerEdge {
@@ -143,6 +373,7 @@ input CustomerUpdateInput {
   cel_phone: String
   line_items: LineItemUpdateManyWithoutCustomerInput
   lienItemCount: Int
+  checkouts: CheckoutUpdateManyInput
 }
 
 input CustomerUpdateManyMutationInput {
@@ -176,6 +407,7 @@ input CustomerUpdateWithoutLine_itemsDataInput {
   state: String
   cel_phone: String
   lienItemCount: Int
+  checkouts: CheckoutUpdateManyInput
 }
 
 input CustomerUpsertWithoutLine_itemsInput {
@@ -319,6 +551,7 @@ input CustomerWhereInput {
   lienItemCount_lte: Int
   lienItemCount_gt: Int
   lienItemCount_gte: Int
+  checkouts_some: CheckoutWhereInput
   AND: [CustomerWhereInput!]
 }
 
@@ -505,6 +738,12 @@ input LineItemWhereUniqueInput {
 scalar Long
 
 type Mutation {
+  createCheckout(data: CheckoutCreateInput!): Checkout!
+  updateCheckout(data: CheckoutUpdateInput!, where: CheckoutWhereUniqueInput!): Checkout
+  updateManyCheckouts(data: CheckoutUpdateManyMutationInput!, where: CheckoutWhereInput): BatchPayload!
+  upsertCheckout(where: CheckoutWhereUniqueInput!, create: CheckoutCreateInput!, update: CheckoutUpdateInput!): Checkout!
+  deleteCheckout(where: CheckoutWhereUniqueInput!): Checkout
+  deleteManyCheckouts(where: CheckoutWhereInput): BatchPayload!
   createCustomer(data: CustomerCreateInput!): Customer!
   updateCustomer(data: CustomerUpdateInput!, where: CustomerWhereUniqueInput!): Customer
   updateManyCustomers(data: CustomerUpdateManyMutationInput!, where: CustomerWhereInput): BatchPayload!
@@ -783,6 +1022,9 @@ input ProductWhereUniqueInput {
 }
 
 type Query {
+  checkout(where: CheckoutWhereUniqueInput!): Checkout
+  checkouts(where: CheckoutWhereInput, orderBy: CheckoutOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Checkout]!
+  checkoutsConnection(where: CheckoutWhereInput, orderBy: CheckoutOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CheckoutConnection!
   customer(where: CustomerWhereUniqueInput!): Customer
   customers(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Customer]!
   customersConnection(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CustomerConnection!
@@ -798,7 +1040,14 @@ type Query {
   node(id: ID!): Node
 }
 
+enum STATUS {
+  PENDING
+  SUCCESS
+  ERROR
+}
+
 type Subscription {
+  checkout(where: CheckoutSubscriptionWhereInput): CheckoutSubscriptionPayload
   customer(where: CustomerSubscriptionWhereInput): CustomerSubscriptionPayload
   lineItem(where: LineItemSubscriptionWhereInput): LineItemSubscriptionPayload
   product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload

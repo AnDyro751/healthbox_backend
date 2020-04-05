@@ -1,4 +1,6 @@
 const createUser = require("./users/createUser");
+const currentCustomer = require("./customers/currentCustomer");
+const addLineItem = require("./line_items/addLineItem");
 const getUsers = require("./users/getUsers");
 const createProduct = require("./products/createProduct")
 const signUpUser = require("./users/signUpUser")
@@ -11,8 +13,11 @@ const uuid = require("uuid")
 
 module.exports.resolvers = {
     Query: {
+        currentCustomer: (_, args, {request}) => {
+            return currentCustomer(prisma, request);
+        },
         users: async (parent, args, ctx) => {
-            return getUsers(prisma, parent, args, ctx);
+            return prisma.users({...args})
         },
         customer: (_, args) => {
             return prisma.customer({...args.where})
@@ -28,7 +33,6 @@ module.exports.resolvers = {
     Customer: {
         line_items: async (parent, args) => {
             return prisma.customer({id: parent.id}).line_items()
-            // return prisma.lineItems({where: {customer: parent.id}})
         },
     },
     LineItem: {
@@ -37,9 +41,9 @@ module.exports.resolvers = {
         }
     },
     Mutation: {
-        // signInUser: (_, args, ctx) => {
-        //     // return signInUser()
-        // },
+        addLineItem: (_, args, {request}) => {
+            return addLineItem(prisma, args, request);
+        },
         signUpUser: (_, args, {request}) => {
             return signUpUser(prisma, _, args, request);
         },

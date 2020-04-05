@@ -4,6 +4,7 @@ datamodel:
   - models/product.graphql
   - models/customer.graphql
   - models/line_item.graphql
+  - models/checkout.graphql
 databaseType: document
 
 

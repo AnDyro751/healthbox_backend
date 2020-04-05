@@ -1,7 +1,18 @@
 {
   "version": 2,
   "env": {
-    "IS_NOW": "true"
+    "NODE_ENV": "production"
   },
-  "routes": [{ "src": "/.*", "dest": "src/index.js" }]
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "src/index.js"
+    }
+  ]
 }
