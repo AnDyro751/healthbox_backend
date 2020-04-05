@@ -10,16 +10,30 @@ module.exports = async (prisma, args, request) => {
     if (!customer) {
         return new AuthenticationError("Ha ocurrido un error, intenta de nuevo")
     }
-    const products = await prisma.lineItems({
+    const line_items = await prisma.lineItems({
         where: {
             customer: {
                 id: customerId,
             },
         }
     });
-    if (products.length <= 0) {
+    if (line_items.length <= 0) {
         return new Error("Aún no tienes productos en el carrito")
     }
+    let all_products = []
+    //     [{
+    //     name: 'T-shirt',
+    //     description: 'Comfortable cotton t-shirt',
+    //     images: ['https://example.com/t-shirt.png'],
+    //     amount: 5000,
+    //     currency: 'mxn',
+    //     quantity: 1,
+    // }]
+    line_items.map((pr)=>{
+        all_products.push({
+            name: pr.product()
+        })
+    })
     console.log("PROD", products)
     const lastPendingCheckout = await prisma.checkouts({
         where: {
@@ -34,14 +48,7 @@ module.exports = async (prisma, args, request) => {
         // RETORNAMOS EL CHECKOUT QUE YA SE HA CREADO
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
-            line_items: [{
-                name: 'T-shirt',
-                description: 'Comfortable cotton t-shirt',
-                images: ['https://example.com/t-shirt.png'],
-                amount: 5000,
-                currency: 'mxn',
-                quantity: 1,
-            }],
+            line_items: all_products,
             success_url: `https://example.com/success/${lastPendingCheckout[0].uuid}`,
             cancel_url: 'https://example.com/cancel',
         });

@@ -50,7 +50,7 @@ module.exports = async (prisma, args, request) => {
                 lienItemCount: customer.lienItemCount += 1
             }
         });
-        return {product: product, lineItemCount: new_customer.lienItemCount}
+        return {product: product, customer: new_customer}
     } else {
         const new_customer = await prisma.updateCustomer({
             where: {
@@ -72,6 +72,6 @@ module.exports = async (prisma, args, request) => {
                 }
             }
         })
-        return {product: product, lineItemCount: 1}
+        return {product: product, customer: new_customer}
     }
 }

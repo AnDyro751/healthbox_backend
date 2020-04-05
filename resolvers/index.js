@@ -22,13 +22,17 @@ module.exports.resolvers = {
         customer: (_, args) => {
             return prisma.customer({...args.where})
         },
+        // LINE ITEMS
+        lineItems: (_, args, ctx) => {
+            return prisma.lineItems({...args})
+        },
         // PRODUCTS
         products: (_, args, ctx) => {
             return prisma.products({...args})
         },
         customers: (_, args) => {
             return prisma.customers({...args})
-        }
+        },
     },
     Customer: {
         line_items: async (parent, args) => {
@@ -79,6 +83,11 @@ module.exports.resolvers = {
             return prisma.createCustomer({...args.data})
         },
         deleteManyCustomers: async (_, args, ctx) => {
+            await prisma.deleteManyCheckouts({
+                customer: {
+                    id_not_contains: "jasjabsna"
+                }
+            })
             return prisma.deleteManyCustomers(args.where)
         },
     }

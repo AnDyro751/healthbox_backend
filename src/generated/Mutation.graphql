@@ -1,6 +1,6 @@
 type Mutation{
     signUpUser(data: UserCreateInput!): SignInUserPayload
-    addLineItem(data: AddLineItemInput!): AddLineItemPayload
+    addLineItem(data: AddLineItemInput!): AddLineItemPayload!
     getCheckout: CurrentCheckoutPayload!
 }
 
@@ -21,7 +21,7 @@ type CurrentCheckoutPayload{
 
 type AddLineItemPayload{
     product: Product!
-    lineItemCount: Int!
+    customer: Customer!
 }
 
 
