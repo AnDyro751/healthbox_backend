@@ -306,10 +306,10 @@ export type ProductOrderByInput =
   | "name_DESC"
   | "price_ASC"
   | "price_DESC"
-  | "description_ASC"
-  | "description_DESC"
   | "size_ASC"
   | "size_DESC"
+  | "image_ASC"
+  | "image_DESC"
   | "kind_ASC"
   | "kind_DESC"
   | "max_buy_ASC"
@@ -407,20 +407,6 @@ export interface ProductWhereInput {
   price_lte?: Maybe<Float>;
   price_gt?: Maybe<Float>;
   price_gte?: Maybe<Float>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
   size?: Maybe<String>;
   size_not?: Maybe<String>;
   size_in?: Maybe<String[] | String>;
@@ -435,6 +421,20 @@ export interface ProductWhereInput {
   size_not_starts_with?: Maybe<String>;
   size_ends_with?: Maybe<String>;
   size_not_ends_with?: Maybe<String>;
+  image?: Maybe<String>;
+  image_not?: Maybe<String>;
+  image_in?: Maybe<String[] | String>;
+  image_not_in?: Maybe<String[] | String>;
+  image_lt?: Maybe<String>;
+  image_lte?: Maybe<String>;
+  image_gt?: Maybe<String>;
+  image_gte?: Maybe<String>;
+  image_contains?: Maybe<String>;
+  image_not_contains?: Maybe<String>;
+  image_starts_with?: Maybe<String>;
+  image_not_starts_with?: Maybe<String>;
+  image_ends_with?: Maybe<String>;
+  image_not_ends_with?: Maybe<String>;
   kind?: Maybe<KIND_VALUE>;
   kind_not?: Maybe<KIND_VALUE>;
   kind_in?: Maybe<KIND_VALUE[] | KIND_VALUE>;
@@ -812,8 +812,8 @@ export interface ProductCreateInput {
   id?: Maybe<ID_Input>;
   name: String;
   price?: Maybe<Float>;
-  description: String;
-  size: String;
+  size?: Maybe<String>;
+  image: String;
   kind?: Maybe<KIND_VALUE>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
@@ -890,8 +890,8 @@ export interface ProductUpdateOneRequiredInput {
 export interface ProductUpdateDataInput {
   name?: Maybe<String>;
   price?: Maybe<Float>;
-  description?: Maybe<String>;
   size?: Maybe<String>;
+  image?: Maybe<String>;
   kind?: Maybe<KIND_VALUE>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
@@ -1181,8 +1181,8 @@ export interface LineItemUpdateManyMutationInput {
 export interface ProductUpdateInput {
   name?: Maybe<String>;
   price?: Maybe<Float>;
-  description?: Maybe<String>;
   size?: Maybe<String>;
+  image?: Maybe<String>;
   kind?: Maybe<KIND_VALUE>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
@@ -1192,8 +1192,8 @@ export interface ProductUpdateInput {
 export interface ProductUpdateManyMutationInput {
   name?: Maybe<String>;
   price?: Maybe<Float>;
-  description?: Maybe<String>;
   size?: Maybe<String>;
+  image?: Maybe<String>;
   kind?: Maybe<KIND_VALUE>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
@@ -1462,8 +1462,8 @@ export interface Product {
   id: ID_Output;
   name: String;
   price: Float;
-  description: String;
-  size: String;
+  size?: String;
+  image: String;
   kind: KIND_VALUE;
   max_buy: Int;
   min_buy: Int;
@@ -1474,8 +1474,8 @@ export interface ProductPromise extends Promise<Product>, Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   price: () => Promise<Float>;
-  description: () => Promise<String>;
   size: () => Promise<String>;
+  image: () => Promise<String>;
   kind: () => Promise<KIND_VALUE>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
@@ -1488,8 +1488,8 @@ export interface ProductSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   price: () => Promise<AsyncIterator<Float>>;
-  description: () => Promise<AsyncIterator<String>>;
   size: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
   kind: () => Promise<AsyncIterator<KIND_VALUE>>;
   max_buy: () => Promise<AsyncIterator<Int>>;
   min_buy: () => Promise<AsyncIterator<Int>>;
@@ -1502,8 +1502,8 @@ export interface ProductNullablePromise
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   price: () => Promise<Float>;
-  description: () => Promise<String>;
   size: () => Promise<String>;
+  image: () => Promise<String>;
   kind: () => Promise<KIND_VALUE>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
@@ -2060,8 +2060,8 @@ export interface ProductPreviousValues {
   id: ID_Output;
   name: String;
   price: Float;
-  description: String;
-  size: String;
+  size?: String;
+  image: String;
   kind: KIND_VALUE;
   max_buy: Int;
   min_buy: Int;
@@ -2074,8 +2074,8 @@ export interface ProductPreviousValuesPromise
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   price: () => Promise<Float>;
-  description: () => Promise<String>;
   size: () => Promise<String>;
+  image: () => Promise<String>;
   kind: () => Promise<KIND_VALUE>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
@@ -2088,8 +2088,8 @@ export interface ProductPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   price: () => Promise<AsyncIterator<Float>>;
-  description: () => Promise<AsyncIterator<String>>;
   size: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
   kind: () => Promise<AsyncIterator<KIND_VALUE>>;
   max_buy: () => Promise<AsyncIterator<Int>>;
   min_buy: () => Promise<AsyncIterator<Int>>;

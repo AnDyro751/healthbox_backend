@@ -846,8 +846,8 @@ type Product {
   id: ID!
   name: String!
   price: Float!
-  description: String!
-  size: String!
+  size: String
+  image: String!
   kind: KIND_VALUE!
   max_buy: Int!
   min_buy: Int!
@@ -864,8 +864,8 @@ input ProductCreateInput {
   id: ID
   name: String!
   price: Float
-  description: String!
-  size: String!
+  size: String
+  image: String!
   kind: KIND_VALUE
   max_buy: Int
   min_buy: Int
@@ -889,10 +889,10 @@ enum ProductOrderByInput {
   name_DESC
   price_ASC
   price_DESC
-  description_ASC
-  description_DESC
   size_ASC
   size_DESC
+  image_ASC
+  image_DESC
   kind_ASC
   kind_DESC
   max_buy_ASC
@@ -907,8 +907,8 @@ type ProductPreviousValues {
   id: ID!
   name: String!
   price: Float!
-  description: String!
-  size: String!
+  size: String
+  image: String!
   kind: KIND_VALUE!
   max_buy: Int!
   min_buy: Int!
@@ -934,8 +934,8 @@ input ProductSubscriptionWhereInput {
 input ProductUpdateDataInput {
   name: String
   price: Float
-  description: String
   size: String
+  image: String
   kind: KIND_VALUE
   max_buy: Int
   min_buy: Int
@@ -945,8 +945,8 @@ input ProductUpdateDataInput {
 input ProductUpdateInput {
   name: String
   price: Float
-  description: String
   size: String
+  image: String
   kind: KIND_VALUE
   max_buy: Int
   min_buy: Int
@@ -956,8 +956,8 @@ input ProductUpdateInput {
 input ProductUpdateManyMutationInput {
   name: String
   price: Float
-  description: String
   size: String
+  image: String
   kind: KIND_VALUE
   max_buy: Int
   min_buy: Int
@@ -1013,20 +1013,6 @@ input ProductWhereInput {
   price_lte: Float
   price_gt: Float
   price_gte: Float
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
   size: String
   size_not: String
   size_in: [String!]
@@ -1041,6 +1027,20 @@ input ProductWhereInput {
   size_not_starts_with: String
   size_ends_with: String
   size_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
   kind: KIND_VALUE
   kind_not: KIND_VALUE
   kind_in: [KIND_VALUE!]
