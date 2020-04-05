@@ -1,11 +1,21 @@
 type Mutation{
     signUpUser(data: UserCreateInput!): SignInUserPayload
     addLineItem(data: AddLineItemInput!): AddLineItemPayload
+    getCheckout: CurrentCheckoutPayload!
 }
 
 
 input AddLineItemInput{
     product_id: String!
+}
+input UserSignInInput{
+    email: String!
+    password: String!
+}
+
+type CurrentCheckoutPayload{
+    #    VAMOS A RETORNAR EL ULTIMO CHECKOUT CON ESTADO PENDING
+    checkout: Checkout!
 }
 
 type AddLineItemPayload{
@@ -13,10 +23,7 @@ type AddLineItemPayload{
     lineItemCount: Int!
 }
 
-input UserSignInInput{
-    email: String!
-    password: String!
-}
+
 
 
 type SignInUserPayload {
