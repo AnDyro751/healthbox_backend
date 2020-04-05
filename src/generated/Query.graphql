@@ -1,8 +1,14 @@
 type Query{
     currentCustomer: CurrentCustomerPayload!
+    getCheckout: CurrentCheckoutPayload!
 }
 #signUpUser(data: UserCreateInput!): SignInUserPayload
 #
+
+type CurrentCheckoutPayload{
+#    VAMOS A RETORNAR EL ULTIMO CHECKOUT CON ESTADO PENDING
+    checkout: Checkout!
+}
 
 type CurrentCustomerPayload{
     customer: Customer!

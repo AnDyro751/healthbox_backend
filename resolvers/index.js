@@ -1,10 +1,10 @@
 const createUser = require("./users/createUser");
+const getCheckout = require("./checkouts/getCheckout");
 const currentCustomer = require("./customers/currentCustomer");
 const addLineItem = require("./line_items/addLineItem");
 const getUsers = require("./users/getUsers");
 const createProduct = require("./products/createProduct")
 const signUpUser = require("./users/signUpUser")
-const {AuthenticationError, ForbiddenError} = require("apollo-server-errors");
 const {prisma} = require("../generated/prisma-client");
 const {addFragmentToInfo} = require('graphql-binding')
 const jwt = require('jsonwebtoken')
@@ -40,7 +40,13 @@ module.exports.resolvers = {
             return prisma.lineItem({id: parent.id}).product()
         }
     },
+
+    // MUTATIONS
     Mutation: {
+        // CHECKOUTS
+        getCheckout: (_, args, {request}) => {
+            return getCheckout(prisma, args, request)
+        },
         addLineItem: (_, args, {request}) => {
             return addLineItem(prisma, args, request);
         },
