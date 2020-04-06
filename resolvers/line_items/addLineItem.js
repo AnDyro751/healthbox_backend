@@ -8,14 +8,16 @@ const {AuthenticationError, ForbiddenError} = require("apollo-server-errors");
 
 module.exports = async (prisma, args, request) => {
     const {customerId} = request;
-    if (!customerId || !args.data.product_id) {
+    console.log("OPERATION", args)
+    const {operation, product_id} = args.data
+    if (!customerId || !product_id) {
         return new ForbiddenError("Ha ocurrido un error, intenta de nuevo");
     }
     const customer = await prisma.customer({id: customerId});
     if (!customer) {
         return new ForbiddenError("Ha ocurrido un error, intenta de nuevo");
     }
-    const product = await prisma.product({id: args.data.product_id})
+    const product = await prisma.product({id: product_id})
     if (!product) {
         return new ForbiddenError(("El producto que deseas agregar ya no está disponible"))
     }
@@ -26,11 +28,13 @@ module.exports = async (prisma, args, request) => {
                 id: customerId
             },
             product: {
-                id: args.data.product_id
+                id: product_id
             }
         }
     })
-    console.log("RE", recordExist)
+    if (recordExist.length <= 0 && operation === "DELETE") {
+        return new Error("No puedes borrar este elemento")
+    }
     if (recordExist.length > 0) {
         // ACTUALIZAR EL RECORD
         const currentRecord = recordExist[0];
@@ -39,7 +43,8 @@ module.exports = async (prisma, args, request) => {
                 id: currentRecord.id
             },
             data: {
-                quantity: currentRecord.quantity += 1
+                quantity: operation === "ADD" ? currentRecord.quantity += 1 : currentRecord.quantity -= 1
+
             }
         })
         const new_customer = await prisma.updateCustomer({
@@ -47,11 +52,13 @@ module.exports = async (prisma, args, request) => {
                 id: customerId
             },
             data: {
-                lienItemCount: customer.lienItemCount += 1
+                lienItemCount: operation === "ADD" ? customer.lienItemCount += 1 : customer.lienItemCount -= 1
             }
         });
         return {product: product, customer: new_customer}
     } else {
+
+        // SE VA A CREAR EL LINE ITEM
         const new_customer = await prisma.updateCustomer({
             where: {
                 id: customerId
