@@ -4,10 +4,16 @@ type Mutation{
     getCheckout: CurrentCheckoutPayload!
 }
 
-
 input AddLineItemInput{
     product_id: String!
+    operation: OPERATION!
 }
+
+enum OPERATION{
+    ADD
+    DELETE
+}
+
 input UserSignInInput{
     email: String!
     password: String!

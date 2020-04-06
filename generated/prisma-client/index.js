@@ -13,6 +13,10 @@ var models = [
     embedded: false
   },
   {
+    name: "KIND_VALUE",
+    embedded: false
+  },
+  {
     name: "Customer",
     embedded: false
   },
