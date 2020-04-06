@@ -259,8 +259,6 @@ export interface ClientConstructor<T> {
 
 export type STATUS = "PENDING" | "SUCCESS" | "ERROR";
 
-export type KIND_VALUE = "ADULT" | "CHILDREN";
-
 export type LineItemOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -310,8 +308,8 @@ export type ProductOrderByInput =
   | "size_DESC"
   | "image_ASC"
   | "image_DESC"
-  | "kind_ASC"
-  | "kind_DESC"
+  | "personalItem_ASC"
+  | "personalItem_DESC"
   | "max_buy_ASC"
   | "max_buy_DESC"
   | "min_buy_ASC"
@@ -626,10 +624,8 @@ export interface ProductWhereInput {
   image_not_starts_with?: Maybe<String>;
   image_ends_with?: Maybe<String>;
   image_not_ends_with?: Maybe<String>;
-  kind?: Maybe<KIND_VALUE>;
-  kind_not?: Maybe<KIND_VALUE>;
-  kind_in?: Maybe<KIND_VALUE[] | KIND_VALUE>;
-  kind_not_in?: Maybe<KIND_VALUE[] | KIND_VALUE>;
+  personalItem?: Maybe<Boolean>;
+  personalItem_not?: Maybe<Boolean>;
   max_buy?: Maybe<Int>;
   max_buy_not?: Maybe<Int>;
   max_buy_in?: Maybe<Int[] | Int>;
@@ -815,7 +811,7 @@ export interface ProductCreateWithoutLine_itemsInput {
   price?: Maybe<Float>;
   size?: Maybe<String>;
   image: String;
-  kind?: Maybe<KIND_VALUE>;
+  personalItem?: Maybe<Boolean>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
   discount_for_more?: Maybe<Int>;
@@ -893,7 +889,7 @@ export interface ProductUpdateWithoutLine_itemsDataInput {
   price?: Maybe<Float>;
   size?: Maybe<String>;
   image?: Maybe<String>;
-  kind?: Maybe<KIND_VALUE>;
+  personalItem?: Maybe<Boolean>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
   discount_for_more?: Maybe<Int>;
@@ -1185,7 +1181,7 @@ export interface ProductCreateInput {
   price?: Maybe<Float>;
   size?: Maybe<String>;
   image: String;
-  kind?: Maybe<KIND_VALUE>;
+  personalItem?: Maybe<Boolean>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
   discount_for_more?: Maybe<Int>;
@@ -1210,7 +1206,7 @@ export interface ProductUpdateInput {
   price?: Maybe<Float>;
   size?: Maybe<String>;
   image?: Maybe<String>;
-  kind?: Maybe<KIND_VALUE>;
+  personalItem?: Maybe<Boolean>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
   discount_for_more?: Maybe<Int>;
@@ -1261,7 +1257,7 @@ export interface ProductUpdateManyMutationInput {
   price?: Maybe<Float>;
   size?: Maybe<String>;
   image?: Maybe<String>;
-  kind?: Maybe<KIND_VALUE>;
+  personalItem?: Maybe<Boolean>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
   discount_for_more?: Maybe<Int>;
@@ -1531,7 +1527,7 @@ export interface Product {
   price: Float;
   size?: String;
   image: String;
-  kind: KIND_VALUE;
+  personalItem?: Boolean;
   max_buy: Int;
   min_buy: Int;
   discount_for_more?: Int;
@@ -1543,7 +1539,7 @@ export interface ProductPromise extends Promise<Product>, Fragmentable {
   price: () => Promise<Float>;
   size: () => Promise<String>;
   image: () => Promise<String>;
-  kind: () => Promise<KIND_VALUE>;
+  personalItem: () => Promise<Boolean>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
   discount_for_more: () => Promise<Int>;
@@ -1566,7 +1562,7 @@ export interface ProductSubscription
   price: () => Promise<AsyncIterator<Float>>;
   size: () => Promise<AsyncIterator<String>>;
   image: () => Promise<AsyncIterator<String>>;
-  kind: () => Promise<AsyncIterator<KIND_VALUE>>;
+  personalItem: () => Promise<AsyncIterator<Boolean>>;
   max_buy: () => Promise<AsyncIterator<Int>>;
   min_buy: () => Promise<AsyncIterator<Int>>;
   discount_for_more: () => Promise<AsyncIterator<Int>>;
@@ -1589,7 +1585,7 @@ export interface ProductNullablePromise
   price: () => Promise<Float>;
   size: () => Promise<String>;
   image: () => Promise<String>;
-  kind: () => Promise<KIND_VALUE>;
+  personalItem: () => Promise<Boolean>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
   discount_for_more: () => Promise<Int>;
@@ -2156,7 +2152,7 @@ export interface ProductPreviousValues {
   price: Float;
   size?: String;
   image: String;
-  kind: KIND_VALUE;
+  personalItem?: Boolean;
   max_buy: Int;
   min_buy: Int;
   discount_for_more?: Int;
@@ -2170,7 +2166,7 @@ export interface ProductPreviousValuesPromise
   price: () => Promise<Float>;
   size: () => Promise<String>;
   image: () => Promise<String>;
-  kind: () => Promise<KIND_VALUE>;
+  personalItem: () => Promise<Boolean>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
   discount_for_more: () => Promise<Int>;
@@ -2184,7 +2180,7 @@ export interface ProductPreviousValuesSubscription
   price: () => Promise<AsyncIterator<Float>>;
   size: () => Promise<AsyncIterator<String>>;
   image: () => Promise<AsyncIterator<String>>;
-  kind: () => Promise<AsyncIterator<KIND_VALUE>>;
+  personalItem: () => Promise<AsyncIterator<Boolean>>;
   max_buy: () => Promise<AsyncIterator<Int>>;
   min_buy: () => Promise<AsyncIterator<Int>>;
   discount_for_more: () => Promise<AsyncIterator<Int>>;
@@ -2288,10 +2284,6 @@ export const models: Model[] = [
   },
   {
     name: "Product",
-    embedded: false
-  },
-  {
-    name: "KIND_VALUE",
     embedded: false
   },
   {
