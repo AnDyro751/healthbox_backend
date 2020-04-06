@@ -614,6 +614,12 @@ input CustomerWhereUniqueInput {
   id: ID
 }
 
+enum KIND_VALUE {
+  BOX
+  PERSONAL
+  SUPPPLY
+}
+
 type LineItem {
   id: ID!
   quantity: Int!
@@ -881,8 +887,8 @@ type Product {
   name: String!
   price: Float!
   size: String
-  image: String!
-  personalItem: Boolean!
+  image: String
+  kind: KIND_VALUE!
   max_buy: Int!
   min_buy: Int!
   discount_for_more: Int
@@ -900,8 +906,8 @@ input ProductCreateInput {
   name: String!
   price: Float
   size: String
-  image: String!
-  personalItem: Boolean
+  image: String
+  kind: KIND_VALUE!
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
@@ -918,8 +924,8 @@ input ProductCreateWithoutLine_itemsInput {
   name: String!
   price: Float
   size: String
-  image: String!
-  personalItem: Boolean
+  image: String
+  kind: KIND_VALUE!
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
@@ -941,8 +947,8 @@ enum ProductOrderByInput {
   size_DESC
   image_ASC
   image_DESC
-  personalItem_ASC
-  personalItem_DESC
+  kind_ASC
+  kind_DESC
   max_buy_ASC
   max_buy_DESC
   min_buy_ASC
@@ -956,8 +962,8 @@ type ProductPreviousValues {
   name: String!
   price: Float!
   size: String
-  image: String!
-  personalItem: Boolean
+  image: String
+  kind: KIND_VALUE!
   max_buy: Int!
   min_buy: Int!
   discount_for_more: Int
@@ -984,7 +990,7 @@ input ProductUpdateInput {
   price: Float
   size: String
   image: String
-  personalItem: Boolean
+  kind: KIND_VALUE
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
@@ -996,7 +1002,7 @@ input ProductUpdateManyMutationInput {
   price: Float
   size: String
   image: String
-  personalItem: Boolean
+  kind: KIND_VALUE
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
@@ -1014,7 +1020,7 @@ input ProductUpdateWithoutLine_itemsDataInput {
   price: Float
   size: String
   image: String
-  personalItem: Boolean
+  kind: KIND_VALUE
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
@@ -1090,8 +1096,10 @@ input ProductWhereInput {
   image_not_starts_with: String
   image_ends_with: String
   image_not_ends_with: String
-  personalItem: Boolean
-  personalItem_not: Boolean
+  kind: KIND_VALUE
+  kind_not: KIND_VALUE
+  kind_in: [KIND_VALUE!]
+  kind_not_in: [KIND_VALUE!]
   max_buy: Int
   max_buy_not: Int
   max_buy_in: [Int!]

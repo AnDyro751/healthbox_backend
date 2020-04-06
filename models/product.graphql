@@ -3,10 +3,16 @@ type Product {
 	name: String!
 	price: Float! @default(value: 10)
 	size: String
-	image: String!
-	personalItem: Boolean! @default(value: true)
+	image: String
+	kind: KIND_VALUE!
 	max_buy: Int! @default(value: 10)
 	min_buy: Int! @default(value: 1)
 	discount_for_more: Int @default(value: 7) # DESCUENTO POR MAYOREO + 1
 	line_items: [LineItem] @relation(link: INLINE, onDelete: SET_NULL)
+}
+
+enum KIND_VALUE {
+	BOX,
+  PERSONAL,
+  SUPPPLY
 }
