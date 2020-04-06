@@ -957,7 +957,7 @@ type ProductPreviousValues {
   price: Float!
   size: String
   image: String!
-  personalItem: Boolean
+  personalItem: Boolean!
   max_buy: Int!
   min_buy: Int!
   discount_for_more: Int
