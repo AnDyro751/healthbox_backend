@@ -8,7 +8,6 @@ const {AuthenticationError, ForbiddenError} = require("apollo-server-errors");
 
 module.exports = async (prisma, args, request) => {
     const {customerId} = request;
-    console.log("OPERATION", args)
     const {operation, product_id} = args.data
     if (!customerId || !product_id) {
         return new ForbiddenError("Ha ocurrido un error, intenta de nuevo");
@@ -32,21 +31,31 @@ module.exports = async (prisma, args, request) => {
             }
         }
     })
+    console.log("HOLA 1",recordExist)
     if (recordExist.length <= 0 && operation === "DELETE") {
-        return new Error("No puedes borrar este elemento")
+        return new Error("El elemento que deseas borrar no existe")
     }
+    console.log("HOLA 2")
     if (recordExist.length > 0) {
         // ACTUALIZAR EL RECORD
         const currentRecord = recordExist[0];
-        const new_line_item = await prisma.updateLineItem({
-            where: {
+        let new_line_item_quantity = operation === "ADD" ? currentRecord.quantity += 1 : currentRecord.quantity -= 1
+        if (new_line_item_quantity <= 0) {
+            const delete_line_item = await prisma.deleteLineItem({
                 id: currentRecord.id
-            },
-            data: {
-                quantity: operation === "ADD" ? currentRecord.quantity += 1 : currentRecord.quantity -= 1
+            })
+        } else {
+            const new_line_item = await prisma.updateLineItem({
+                where: {
+                    id: currentRecord.id
+                },
+                data: {
+                    quantity: new_line_item_quantity
 
-            }
-        })
+                }
+            })
+        }
+
         const new_customer = await prisma.updateCustomer({
             where: {
                 id: customerId
