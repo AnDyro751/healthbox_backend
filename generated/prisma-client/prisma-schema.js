@@ -1167,9 +1167,9 @@ type Subscription {
 
 type User {
   id: ID!
-  name: String!
-  last_name: String!
-  is_admin: Boolean!
+  name: String
+  last_name: String
+  is_admin: Boolean
   password: String
   email: String
   cel_phone: String
@@ -1183,8 +1183,8 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
-  name: String!
-  last_name: String!
+  name: String
+  last_name: String
   is_admin: Boolean
   password: String
   email: String
@@ -1215,9 +1215,9 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
-  name: String!
-  last_name: String!
-  is_admin: Boolean!
+  name: String
+  last_name: String
+  is_admin: Boolean
   password: String
   email: String
   cel_phone: String

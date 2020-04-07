@@ -16,7 +16,7 @@ const server = new GraphQLServer({
 })
 
 const corsOptions = {
-    origin: "https://healthbox.now.sh",
+    origin: "http://localhost:3000",
     credentials: true // <-- REQUIRED backend setting
 }
 

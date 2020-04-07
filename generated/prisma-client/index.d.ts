@@ -1269,8 +1269,8 @@ export interface ProductUpdateManyMutationInput {
 
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
-  name: String;
-  last_name: String;
+  name?: Maybe<String>;
+  last_name?: Maybe<String>;
   is_admin?: Maybe<Boolean>;
   password?: Maybe<String>;
   email?: Maybe<String>;
@@ -1851,9 +1851,9 @@ export interface AggregateProductSubscription
 
 export interface User {
   id: ID_Output;
-  name: String;
-  last_name: String;
-  is_admin: Boolean;
+  name?: String;
+  last_name?: String;
+  is_admin?: Boolean;
   password?: String;
   email?: String;
   cel_phone?: String;
@@ -2217,9 +2217,9 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface UserPreviousValues {
   id: ID_Output;
-  name: String;
-  last_name: String;
-  is_admin: Boolean;
+  name?: String;
+  last_name?: String;
+  is_admin?: Boolean;
   password?: String;
   email?: String;
   cel_phone?: String;
