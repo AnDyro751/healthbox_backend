@@ -61,5 +61,5 @@ server.start({
     cors: {
         credentials: true
     },
-    port: 80
+    port: origin: process.env.NODE_ENV === "production" ? 80 : 4000
 }, () => console.log(`The server is running on http://localhost:4000`))
