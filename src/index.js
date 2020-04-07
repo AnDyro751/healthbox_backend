@@ -60,5 +60,6 @@ server.express.use(async (req, res, next) => {
 server.start({
     cors: {
         credentials: true
-    }
+    },
+    port: 80
 }, () => console.log(`The server is running on http://localhost:4000`))
