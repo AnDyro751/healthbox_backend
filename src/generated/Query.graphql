@@ -1,9 +1,14 @@
 type Query{
     currentCustomer: CurrentCustomerPayload!
+    getShippingPrice: ShippingPricePayload!
+    #c96750331294926b3c6d60a576d3ada3f252d4bfdc0e509b90c02445ef2dcf44 # ENVIA API KEY
 }
-#signUpUser(data: UserCreateInput!): SignInUserPayload
-#
 
+
+type ShippingPricePayload {
+    price: Float!
+    error: String
+}
 
 type CurrentCustomerPayload{
     customer: Customer!
