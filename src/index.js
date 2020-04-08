@@ -14,7 +14,7 @@ const server = new GraphQLServer({
 })
 const corsOptions = {
     origin: "http://localhost:3000",
-    credentials: true // <-- REQUIRED backend setting
+    // credentials: true // <-- REQUIRED backend setting
 }
 server.express.use(cors(corsOptions))
 server.express.use(cookieParser())
