@@ -55,7 +55,7 @@ server.express.use(async (req, res, next) => {
 
 server.start({
     cors: {
-        origin: "http://localhost:3000",
+        origin: "https://healthboxapi.now.sh",
         credentials: false
     }
 }, () => console.log(`The server is running on http://localhost:4000`))
