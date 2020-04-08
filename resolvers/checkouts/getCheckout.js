@@ -1,6 +1,6 @@
 const {AuthenticationError, ForbiddenError} = require("apollo-server-errors");
 const {v4} = require("uuid")
-const stripe = require('stripe')('sk_test_G0SpvEsAzOLHpOXBh7QI7Vvp00XSWZ52NN');
+const stripe = require('stripe')('sk_test_2kjNkDR7DADs6OGSuFBm2znb00AEw4nl5H');
 module.exports = async (prisma, args, request) => {
     const {customerId} = request;
     if (!customerId) {
@@ -45,13 +45,12 @@ module.exports = async (prisma, args, request) => {
     })
 
     if (lastPendingCheckout.length > 0) {
-        console.log("LA", lastPendingCheckout[0])
         // RETORNAMOS EL CHECKOUT QUE YA SE HA CREADO
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: all_products,
-            success_url: `https://example.com/success/${lastPendingCheckout[0].uuid}`,
-            cancel_url: 'https://example.com/cancel',
+            success_url: 'http://healthbox.now.sh/creando',
+            cancel_url: 'http://healthbox.now.sh/cart'
         });
         return {checkout: lastPendingCheckout[0], stripe_token: session.id}
 
@@ -64,14 +63,13 @@ module.exports = async (prisma, args, request) => {
                 }
             }
         })
-        console.log("A", new_checkout)
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: all_products,
-            success_url: `https://example.com/success/${new_checkout.uuid}`,
-            cancel_url: 'https://example.com/cancel',
+            success_url: 'http://healthbox.now.sh/creando',
+            cancel_url: 'http://healthbox.now.sh/cart'
         });
-        return {checkout: new_checkout, stripe_token: session.od}
+        return {checkout: new_checkout, stripe_token: session.id}
         // CREAMOS UN NUEVO CHECKOUT
     }
 }

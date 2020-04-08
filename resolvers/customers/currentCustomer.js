@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 
 
 module.exports = async (prisma, request) => {
+    console.log("HOLA", request.access_token)
     const {customerId, access_token} = request;
     if (!customerId) {
         // SE VA A CREAR UN NUEVO USUARIO ANONIMO Y SE VA A RETORNAR EL TOKEN  Y EL CUSTOMER ID

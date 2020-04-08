@@ -31,11 +31,9 @@ module.exports = async (prisma, args, request) => {
             }
         }
     })
-    console.log("HOLA 1",recordExist)
     if (recordExist.length <= 0 && operation === "DELETE") {
         return new Error("El elemento que deseas borrar no existe")
     }
-    console.log("HOLA 2")
     if (recordExist.length > 0) {
         // ACTUALIZAR EL RECORD
         const currentRecord = recordExist[0];

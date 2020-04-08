@@ -16,7 +16,7 @@ const server = new GraphQLServer({
 })
 
 const corsOptions = {
-    origin: process.env.NODE_ENV === "production" ? "http://localhost:3000" : "http://localhost:3000",
+    origin: "http://localhost:3000",
     credentials: true // <-- REQUIRED backend setting
 }
 

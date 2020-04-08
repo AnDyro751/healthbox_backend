@@ -6,40 +6,39 @@ const signUpUser = require("./users/signUpUser")
 const {prisma} = require("../generated/prisma-client");
 
 module.exports.resolvers = {
-	Query: {
-		currentCustomer: (_, __, {request}) => {
-			return currentCustomer(prisma, request);
-		},
-		users: async (_, args) => {
-			return prisma.users({...args})
-		},
-		customer: (_, args) => {
-			return prisma.customer({...args.where})
-		},
-		// LINE ITEMS
-		lineItems: (_, args) => {
-			return prisma.lineItems({...args})
-		},
-		// PRODUCTS
-		products: (_, args) => {
-			return prisma.products({...args})
-		},
-		customers: (_, args) => {
-			return prisma.customers({...args})
-		},
-	},
-	Customer: {
-		line_items: async (parent) => {
-			return prisma.customer({id: parent.id}).line_items()
-		},
-	},
-	LineItem: {
-		product: async (parent) => {
-			const product = await prisma.lineItem({id: parent.id}).product()
-			console.log("PROD",product)
-			return product
-		}
-	},
+    Query: {
+        currentCustomer: (_, __, {request}) => {
+            return currentCustomer(prisma, request);
+        },
+        users: async (_, args) => {
+            return prisma.users({...args})
+        },
+        customer: (_, args) => {
+            return prisma.customer({...args.where})
+        },
+        // LINE ITEMS
+        lineItems: (_, args) => {
+            return prisma.lineItems({...args})
+        },
+        // PRODUCTS
+        products: (_, args) => {
+            return prisma.products({...args})
+        },
+        customers: (_, args) => {
+            return prisma.customers({...args})
+        },
+    },
+    Customer: {
+        line_items: async (parent) => {
+            return prisma.customer({id: parent.id}).line_items()
+        },
+    },
+    LineItem: {
+        product: async (parent) => {
+            const product = await prisma.lineItem({id: parent.id}).product()
+            return product
+        }
+    },
 
 	// MUTATIONS
 	Mutation: {
