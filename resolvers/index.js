@@ -78,6 +78,9 @@ module.exports.resolvers = {
 		createCustomer: (_, args) => {
 			return prisma.createCustomer({...args.data})
 		},
+		updateCustomer: async (_, args) => {
+			await prisma.updateCustomer(args)
+		},
 		deleteManyCustomers: async (_, args) => {
 			await prisma.deleteManyCheckouts({
 				customer: {
