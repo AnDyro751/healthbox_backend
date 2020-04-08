@@ -55,6 +55,6 @@ server.express.use(async (req, res, next) => {
 
 server.start({
     cors: {
-        credentials: true
+        origin: "http://localhost:3000"
     }
 }, () => console.log(`The server is running on http://localhost:4000`))
