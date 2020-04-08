@@ -18,8 +18,7 @@ module.exports = async (prisma, args, request) => {
                 id: customerId,
             },
         }
-    });
-
+    })
 
     if (line_items.length <= 0) {
         return new Error("Aún no tienes productos en el carrito")
@@ -49,7 +48,7 @@ module.exports = async (prisma, args, request) => {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: all_products,
-            success_url: 'http://healthbox.now.sh/creando',
+            success_url: `http://localhost:3000/creando?complete=${lastPendingCheckout[0].uuid}`,
             cancel_url: 'http://healthbox.now.sh/cart'
         });
         return {checkout: lastPendingCheckout[0], stripe_token: session.id}
@@ -66,7 +65,7 @@ module.exports = async (prisma, args, request) => {
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: all_products,
-            success_url: 'http://healthbox.now.sh/creando',
+            success_url: `http://localhost:3000/creando?complete=${new_checkout.uuid}`,
             cancel_url: 'http://healthbox.now.sh/cart'
         });
         return {checkout: new_checkout, stripe_token: session.id}

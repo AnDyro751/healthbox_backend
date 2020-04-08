@@ -3,6 +3,7 @@ const currentCustomer = require("./customers/currentCustomer");
 const addLineItem = require("./line_items/addLineItem");
 const createProduct = require("./products/createProduct")
 const signUpUser = require("./users/signUpUser")
+const updateCheckout = require("./checkouts/updateCheckout")
 const {prisma} = require("../generated/prisma-client");
 
 module.exports.resolvers = {
@@ -45,6 +46,9 @@ module.exports.resolvers = {
 		// CHECKOUTS
 		getCheckout: (_, args, {request}) => {
 			return getCheckout(prisma, args, request)
+		},
+		updateCheckout: (_, args, {request}) => {
+			return updateCheckout(prisma, args, request)
 		},
 		addLineItem: (_, args, {request}) => {
 			return addLineItem(prisma, args, request);
