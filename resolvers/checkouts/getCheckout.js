@@ -1,6 +1,6 @@
 const {AuthenticationError, ForbiddenError} = require("apollo-server-errors");
 const {v4} = require("uuid")
-const stripe = require('stripe')('sk_test_2kjNkDR7DADs6OGSuFBm2znb00AEw4nl5H');
+const stripe = require('stripe')('sk_live_fjwJOTZRHzeWyxyrPW5JbnXm00SAHxuzOe');
 module.exports = async (prisma, args, request) => {
     const {customerId} = request;
     if (!customerId) {
