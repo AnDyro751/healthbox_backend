@@ -5,6 +5,7 @@ type Product {
     size: String
     image: String
     kind: KIND_VALUE!
+    people: Int @default(value: 1)
     max_buy: Int! @default(value: 10)
     min_buy: Int! @default(value: 1)
     discount_for_more: Int @default(value: 7) # DESCUENTO POR MAYOREO + 1

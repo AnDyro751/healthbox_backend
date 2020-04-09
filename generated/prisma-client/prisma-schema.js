@@ -267,6 +267,8 @@ type Customer {
   last_name: String
   email: String
   address: String
+  outdoor_number: String
+  interior_number: String
   postal_code: String
   city: String
   state: String
@@ -288,6 +290,8 @@ input CustomerCreateInput {
   last_name: String
   email: String
   address: String
+  outdoor_number: String
+  interior_number: String
   postal_code: String
   city: String
   state: String
@@ -313,6 +317,8 @@ input CustomerCreateWithoutCheckoutsInput {
   last_name: String
   email: String
   address: String
+  outdoor_number: String
+  interior_number: String
   postal_code: String
   city: String
   state: String
@@ -327,6 +333,8 @@ input CustomerCreateWithoutLine_itemsInput {
   last_name: String
   email: String
   address: String
+  outdoor_number: String
+  interior_number: String
   postal_code: String
   city: String
   state: String
@@ -351,6 +359,10 @@ enum CustomerOrderByInput {
   email_DESC
   address_ASC
   address_DESC
+  outdoor_number_ASC
+  outdoor_number_DESC
+  interior_number_ASC
+  interior_number_DESC
   postal_code_ASC
   postal_code_DESC
   city_ASC
@@ -369,6 +381,8 @@ type CustomerPreviousValues {
   last_name: String
   email: String
   address: String
+  outdoor_number: String
+  interior_number: String
   postal_code: String
   city: String
   state: String
@@ -397,6 +411,8 @@ input CustomerUpdateInput {
   last_name: String
   email: String
   address: String
+  outdoor_number: String
+  interior_number: String
   postal_code: String
   city: String
   state: String
@@ -411,6 +427,8 @@ input CustomerUpdateManyMutationInput {
   last_name: String
   email: String
   address: String
+  outdoor_number: String
+  interior_number: String
   postal_code: String
   city: String
   state: String
@@ -439,6 +457,8 @@ input CustomerUpdateWithoutCheckoutsDataInput {
   last_name: String
   email: String
   address: String
+  outdoor_number: String
+  interior_number: String
   postal_code: String
   city: String
   state: String
@@ -452,6 +472,8 @@ input CustomerUpdateWithoutLine_itemsDataInput {
   last_name: String
   email: String
   address: String
+  outdoor_number: String
+  interior_number: String
   postal_code: String
   city: String
   state: String
@@ -541,6 +563,34 @@ input CustomerWhereInput {
   address_not_starts_with: String
   address_ends_with: String
   address_not_ends_with: String
+  outdoor_number: String
+  outdoor_number_not: String
+  outdoor_number_in: [String!]
+  outdoor_number_not_in: [String!]
+  outdoor_number_lt: String
+  outdoor_number_lte: String
+  outdoor_number_gt: String
+  outdoor_number_gte: String
+  outdoor_number_contains: String
+  outdoor_number_not_contains: String
+  outdoor_number_starts_with: String
+  outdoor_number_not_starts_with: String
+  outdoor_number_ends_with: String
+  outdoor_number_not_ends_with: String
+  interior_number: String
+  interior_number_not: String
+  interior_number_in: [String!]
+  interior_number_not_in: [String!]
+  interior_number_lt: String
+  interior_number_lte: String
+  interior_number_gt: String
+  interior_number_gte: String
+  interior_number_contains: String
+  interior_number_not_contains: String
+  interior_number_starts_with: String
+  interior_number_not_starts_with: String
+  interior_number_ends_with: String
+  interior_number_not_ends_with: String
   postal_code: String
   postal_code_not: String
   postal_code_in: [String!]
@@ -889,6 +939,7 @@ type Product {
   size: String
   image: String
   kind: KIND_VALUE!
+  people: Int
   max_buy: Int!
   min_buy: Int!
   discount_for_more: Int
@@ -908,6 +959,7 @@ input ProductCreateInput {
   size: String
   image: String
   kind: KIND_VALUE!
+  people: Int
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
@@ -926,6 +978,7 @@ input ProductCreateWithoutLine_itemsInput {
   size: String
   image: String
   kind: KIND_VALUE!
+  people: Int
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
@@ -949,6 +1002,8 @@ enum ProductOrderByInput {
   image_DESC
   kind_ASC
   kind_DESC
+  people_ASC
+  people_DESC
   max_buy_ASC
   max_buy_DESC
   min_buy_ASC
@@ -964,6 +1019,7 @@ type ProductPreviousValues {
   size: String
   image: String
   kind: KIND_VALUE!
+  people: Int
   max_buy: Int!
   min_buy: Int!
   discount_for_more: Int
@@ -991,6 +1047,7 @@ input ProductUpdateInput {
   size: String
   image: String
   kind: KIND_VALUE
+  people: Int
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
@@ -1003,6 +1060,7 @@ input ProductUpdateManyMutationInput {
   size: String
   image: String
   kind: KIND_VALUE
+  people: Int
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
@@ -1021,6 +1079,7 @@ input ProductUpdateWithoutLine_itemsDataInput {
   size: String
   image: String
   kind: KIND_VALUE
+  people: Int
   max_buy: Int
   min_buy: Int
   discount_for_more: Int
@@ -1100,6 +1159,14 @@ input ProductWhereInput {
   kind_not: KIND_VALUE
   kind_in: [KIND_VALUE!]
   kind_not_in: [KIND_VALUE!]
+  people: Int
+  people_not: Int
+  people_in: [Int!]
+  people_not_in: [Int!]
+  people_lt: Int
+  people_lte: Int
+  people_gt: Int
+  people_gte: Int
   max_buy: Int
   max_buy_not: Int
   max_buy_in: [Int!]

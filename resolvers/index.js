@@ -4,10 +4,14 @@ const addLineItem = require("./line_items/addLineItem");
 const createProduct = require("./products/createProduct")
 const signUpUser = require("./users/signUpUser")
 const updateCheckout = require("./checkouts/updateCheckout")
+const getShippingPrice = require("./checkouts/getShippingPrice")
 const {prisma} = require("../generated/prisma-client");
 
 module.exports.resolvers = {
     Query: {
+        getShippingPrice: (_, args, {request}) => {
+            return getShippingPrice(prisma, request)
+        },
         currentCustomer: (_, __, {request}) => {
             return currentCustomer(prisma, request);
         },
@@ -40,57 +44,56 @@ module.exports.resolvers = {
             return product
         }
     },
-
-	// MUTATIONS
-	Mutation: {
-		// CHECKOUTS
-		getCheckout: (_, args, {request}) => {
-			return getCheckout(prisma, args, request)
-		},
-		updateCheckout: (_, args, {request}) => {
-			return updateCheckout(prisma, args, request)
-		},
-		addLineItem: (_, args, {request}) => {
-			return addLineItem(prisma, args, request);
-		},
-		signUpUser: (_, args, {request}) => {
-			return signUpUser(prisma, _, args, request);
-		},
-		updateUser: (_, args) => {
-			return prisma.updateUser(args)
-		},
-		deleteManyUsers: async (_, args) => {
-			return prisma.deleteManyUsers(args.where)
-		},
-		// PRODUCTS
-		createProduct: async (_, args, ctx) => {
-			return createProduct(prisma, _, args, ctx);
-		},
-		deleteProduct: async (_, args) => {
-			await prisma.deleteManyLineItems({
-				product: {
-					id: args.where.id
-				}
-			});
-			return prisma.deleteProduct({...args.where})
-		},
-		updateProduct: async (_, args) => {
-			await prisma.updateProduct(args)
-		},
-		// CUSTOMERS
-		createCustomer: (_, args) => {
-			return prisma.createCustomer({...args.data})
-		},
-		updateCustomer: async (_, args) => {
-			await prisma.updateCustomer(args)
-		},
-		deleteManyCustomers: async (_, args) => {
-			await prisma.deleteManyCheckouts({
-				customer: {
-					id_not_contains: "jasjabsna"
-				}
-			})
-			return prisma.deleteManyCustomers(args.where)
-		},
-	}
+    // MUTATIONS
+    Mutation: {
+        // CHECKOUTS
+        getCheckout: (_, args, {request}) => {
+            return getCheckout(prisma, args, request)
+        },
+        updateCheckout: (_, args, {request}) => {
+            return updateCheckout(prisma, args, request)
+        },
+        addLineItem: (_, args, {request}) => {
+            return addLineItem(prisma, args, request);
+        },
+        signUpUser: (_, args, {request}) => {
+            return signUpUser(prisma, _, args, request);
+        },
+        updateUser: (_, args) => {
+            return prisma.updateUser(args)
+        },
+        deleteManyUsers: async (_, args) => {
+            return prisma.deleteManyUsers(args.where)
+        },
+        // PRODUCTS
+        createProduct: async (_, args, ctx) => {
+            return createProduct(prisma, _, args, ctx);
+        },
+        deleteProduct: async (_, args) => {
+            await prisma.deleteManyLineItems({
+                product: {
+                    id: args.where.id
+                }
+            });
+            return prisma.deleteProduct({...args.where})
+        },
+        updateProduct: async (_, args) => {
+            return await prisma.updateProduct(args)
+        },
+        // CUSTOMERS
+        createCustomer: (_, args) => {
+            return prisma.createCustomer({...args.data})
+        },
+        updateCustomer: async (_, args) => {
+            await prisma.updateCustomer(args)
+        },
+        deleteManyCustomers: async (_, args) => {
+            await prisma.deleteManyCheckouts({
+                customer: {
+                    id_not_contains: "jasjabsna"
+                }
+            })
+            return prisma.deleteManyCustomers(args.where)
+        },
+    }
 }

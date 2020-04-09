@@ -288,6 +288,10 @@ export type CustomerOrderByInput =
   | "email_DESC"
   | "address_ASC"
   | "address_DESC"
+  | "outdoor_number_ASC"
+  | "outdoor_number_DESC"
+  | "interior_number_ASC"
+  | "interior_number_DESC"
   | "postal_code_ASC"
   | "postal_code_DESC"
   | "city_ASC"
@@ -312,6 +316,8 @@ export type ProductOrderByInput =
   | "image_DESC"
   | "kind_ASC"
   | "kind_DESC"
+  | "people_ASC"
+  | "people_DESC"
   | "max_buy_ASC"
   | "max_buy_DESC"
   | "min_buy_ASC"
@@ -441,6 +447,34 @@ export interface CustomerWhereInput {
   address_not_starts_with?: Maybe<String>;
   address_ends_with?: Maybe<String>;
   address_not_ends_with?: Maybe<String>;
+  outdoor_number?: Maybe<String>;
+  outdoor_number_not?: Maybe<String>;
+  outdoor_number_in?: Maybe<String[] | String>;
+  outdoor_number_not_in?: Maybe<String[] | String>;
+  outdoor_number_lt?: Maybe<String>;
+  outdoor_number_lte?: Maybe<String>;
+  outdoor_number_gt?: Maybe<String>;
+  outdoor_number_gte?: Maybe<String>;
+  outdoor_number_contains?: Maybe<String>;
+  outdoor_number_not_contains?: Maybe<String>;
+  outdoor_number_starts_with?: Maybe<String>;
+  outdoor_number_not_starts_with?: Maybe<String>;
+  outdoor_number_ends_with?: Maybe<String>;
+  outdoor_number_not_ends_with?: Maybe<String>;
+  interior_number?: Maybe<String>;
+  interior_number_not?: Maybe<String>;
+  interior_number_in?: Maybe<String[] | String>;
+  interior_number_not_in?: Maybe<String[] | String>;
+  interior_number_lt?: Maybe<String>;
+  interior_number_lte?: Maybe<String>;
+  interior_number_gt?: Maybe<String>;
+  interior_number_gte?: Maybe<String>;
+  interior_number_contains?: Maybe<String>;
+  interior_number_not_contains?: Maybe<String>;
+  interior_number_starts_with?: Maybe<String>;
+  interior_number_not_starts_with?: Maybe<String>;
+  interior_number_ends_with?: Maybe<String>;
+  interior_number_not_ends_with?: Maybe<String>;
   postal_code?: Maybe<String>;
   postal_code_not?: Maybe<String>;
   postal_code_in?: Maybe<String[] | String>;
@@ -630,6 +664,14 @@ export interface ProductWhereInput {
   kind_not?: Maybe<KIND_VALUE>;
   kind_in?: Maybe<KIND_VALUE[] | KIND_VALUE>;
   kind_not_in?: Maybe<KIND_VALUE[] | KIND_VALUE>;
+  people?: Maybe<Int>;
+  people_not?: Maybe<Int>;
+  people_in?: Maybe<Int[] | Int>;
+  people_not_in?: Maybe<Int[] | Int>;
+  people_lt?: Maybe<Int>;
+  people_lte?: Maybe<Int>;
+  people_gt?: Maybe<Int>;
+  people_gte?: Maybe<Int>;
   max_buy?: Maybe<Int>;
   max_buy_not?: Maybe<Int>;
   max_buy_in?: Maybe<Int[] | Int>;
@@ -783,6 +825,8 @@ export interface CustomerCreateWithoutCheckoutsInput {
   last_name?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
+  outdoor_number?: Maybe<String>;
+  interior_number?: Maybe<String>;
   postal_code?: Maybe<String>;
   city?: Maybe<String>;
   state?: Maybe<String>;
@@ -816,6 +860,7 @@ export interface ProductCreateWithoutLine_itemsInput {
   size?: Maybe<String>;
   image?: Maybe<String>;
   kind: KIND_VALUE;
+  people?: Maybe<Int>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
   discount_for_more?: Maybe<Int>;
@@ -840,6 +885,8 @@ export interface CustomerUpdateWithoutCheckoutsDataInput {
   last_name?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
+  outdoor_number?: Maybe<String>;
+  interior_number?: Maybe<String>;
   postal_code?: Maybe<String>;
   city?: Maybe<String>;
   state?: Maybe<String>;
@@ -894,6 +941,7 @@ export interface ProductUpdateWithoutLine_itemsDataInput {
   size?: Maybe<String>;
   image?: Maybe<String>;
   kind?: Maybe<KIND_VALUE>;
+  people?: Maybe<Int>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
   discount_for_more?: Maybe<Int>;
@@ -964,6 +1012,8 @@ export interface CustomerCreateInput {
   last_name?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
+  outdoor_number?: Maybe<String>;
+  interior_number?: Maybe<String>;
   postal_code?: Maybe<String>;
   city?: Maybe<String>;
   state?: Maybe<String>;
@@ -992,6 +1042,8 @@ export interface CustomerUpdateInput {
   last_name?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
+  outdoor_number?: Maybe<String>;
+  interior_number?: Maybe<String>;
   postal_code?: Maybe<String>;
   city?: Maybe<String>;
   state?: Maybe<String>;
@@ -1109,6 +1161,8 @@ export interface CustomerUpdateManyMutationInput {
   last_name?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
+  outdoor_number?: Maybe<String>;
+  interior_number?: Maybe<String>;
   postal_code?: Maybe<String>;
   city?: Maybe<String>;
   state?: Maybe<String>;
@@ -1134,6 +1188,8 @@ export interface CustomerCreateWithoutLine_itemsInput {
   last_name?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
+  outdoor_number?: Maybe<String>;
+  interior_number?: Maybe<String>;
   postal_code?: Maybe<String>;
   city?: Maybe<String>;
   state?: Maybe<String>;
@@ -1162,6 +1218,8 @@ export interface CustomerUpdateWithoutLine_itemsDataInput {
   last_name?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
+  outdoor_number?: Maybe<String>;
+  interior_number?: Maybe<String>;
   postal_code?: Maybe<String>;
   city?: Maybe<String>;
   state?: Maybe<String>;
@@ -1186,6 +1244,7 @@ export interface ProductCreateInput {
   size?: Maybe<String>;
   image?: Maybe<String>;
   kind: KIND_VALUE;
+  people?: Maybe<Int>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
   discount_for_more?: Maybe<Int>;
@@ -1211,6 +1270,7 @@ export interface ProductUpdateInput {
   size?: Maybe<String>;
   image?: Maybe<String>;
   kind?: Maybe<KIND_VALUE>;
+  people?: Maybe<Int>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
   discount_for_more?: Maybe<Int>;
@@ -1262,6 +1322,7 @@ export interface ProductUpdateManyMutationInput {
   size?: Maybe<String>;
   image?: Maybe<String>;
   kind?: Maybe<KIND_VALUE>;
+  people?: Maybe<Int>;
   max_buy?: Maybe<Int>;
   min_buy?: Maybe<Int>;
   discount_for_more?: Maybe<Int>;
@@ -1391,6 +1452,8 @@ export interface Customer {
   last_name?: String;
   email?: String;
   address?: String;
+  outdoor_number?: String;
+  interior_number?: String;
   postal_code?: String;
   city?: String;
   state?: String;
@@ -1404,6 +1467,8 @@ export interface CustomerPromise extends Promise<Customer>, Fragmentable {
   last_name: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
+  outdoor_number: () => Promise<String>;
+  interior_number: () => Promise<String>;
   postal_code: () => Promise<String>;
   city: () => Promise<String>;
   state: () => Promise<String>;
@@ -1437,6 +1502,8 @@ export interface CustomerSubscription
   last_name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   address: () => Promise<AsyncIterator<String>>;
+  outdoor_number: () => Promise<AsyncIterator<String>>;
+  interior_number: () => Promise<AsyncIterator<String>>;
   postal_code: () => Promise<AsyncIterator<String>>;
   city: () => Promise<AsyncIterator<String>>;
   state: () => Promise<AsyncIterator<String>>;
@@ -1470,6 +1537,8 @@ export interface CustomerNullablePromise
   last_name: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
+  outdoor_number: () => Promise<String>;
+  interior_number: () => Promise<String>;
   postal_code: () => Promise<String>;
   city: () => Promise<String>;
   state: () => Promise<String>;
@@ -1532,6 +1601,7 @@ export interface Product {
   size?: String;
   image?: String;
   kind: KIND_VALUE;
+  people?: Int;
   max_buy: Int;
   min_buy: Int;
   discount_for_more?: Int;
@@ -1544,6 +1614,7 @@ export interface ProductPromise extends Promise<Product>, Fragmentable {
   size: () => Promise<String>;
   image: () => Promise<String>;
   kind: () => Promise<KIND_VALUE>;
+  people: () => Promise<Int>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
   discount_for_more: () => Promise<Int>;
@@ -1567,6 +1638,7 @@ export interface ProductSubscription
   size: () => Promise<AsyncIterator<String>>;
   image: () => Promise<AsyncIterator<String>>;
   kind: () => Promise<AsyncIterator<KIND_VALUE>>;
+  people: () => Promise<AsyncIterator<Int>>;
   max_buy: () => Promise<AsyncIterator<Int>>;
   min_buy: () => Promise<AsyncIterator<Int>>;
   discount_for_more: () => Promise<AsyncIterator<Int>>;
@@ -1590,6 +1662,7 @@ export interface ProductNullablePromise
   size: () => Promise<String>;
   image: () => Promise<String>;
   kind: () => Promise<KIND_VALUE>;
+  people: () => Promise<Int>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
   discount_for_more: () => Promise<Int>;
@@ -2044,6 +2117,8 @@ export interface CustomerPreviousValues {
   last_name?: String;
   email?: String;
   address?: String;
+  outdoor_number?: String;
+  interior_number?: String;
   postal_code?: String;
   city?: String;
   state?: String;
@@ -2059,6 +2134,8 @@ export interface CustomerPreviousValuesPromise
   last_name: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
+  outdoor_number: () => Promise<String>;
+  interior_number: () => Promise<String>;
   postal_code: () => Promise<String>;
   city: () => Promise<String>;
   state: () => Promise<String>;
@@ -2074,6 +2151,8 @@ export interface CustomerPreviousValuesSubscription
   last_name: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   address: () => Promise<AsyncIterator<String>>;
+  outdoor_number: () => Promise<AsyncIterator<String>>;
+  interior_number: () => Promise<AsyncIterator<String>>;
   postal_code: () => Promise<AsyncIterator<String>>;
   city: () => Promise<AsyncIterator<String>>;
   state: () => Promise<AsyncIterator<String>>;
@@ -2157,6 +2236,7 @@ export interface ProductPreviousValues {
   size?: String;
   image?: String;
   kind: KIND_VALUE;
+  people?: Int;
   max_buy: Int;
   min_buy: Int;
   discount_for_more?: Int;
@@ -2171,6 +2251,7 @@ export interface ProductPreviousValuesPromise
   size: () => Promise<String>;
   image: () => Promise<String>;
   kind: () => Promise<KIND_VALUE>;
+  people: () => Promise<Int>;
   max_buy: () => Promise<Int>;
   min_buy: () => Promise<Int>;
   discount_for_more: () => Promise<Int>;
@@ -2185,6 +2266,7 @@ export interface ProductPreviousValuesSubscription
   size: () => Promise<AsyncIterator<String>>;
   image: () => Promise<AsyncIterator<String>>;
   kind: () => Promise<AsyncIterator<KIND_VALUE>>;
+  people: () => Promise<AsyncIterator<Int>>;
   max_buy: () => Promise<AsyncIterator<Int>>;
   min_buy: () => Promise<AsyncIterator<Int>>;
   discount_for_more: () => Promise<AsyncIterator<Int>>;
