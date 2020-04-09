@@ -1,4 +1,4 @@
-endpoint: healthboxapi.azachii.tech:4466/
+endpoint: http://healthboxapi.azachii.tech:4466/
 datamodel:
   - models/user.graphql
   - models/product.graphql

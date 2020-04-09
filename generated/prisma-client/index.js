@@ -36,6 +36,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `http://localhost:4466`
+  endpoint: `http://healthboxapi.azachii.tech:4466/`
 });
 exports.prisma = new exports.Prisma();
