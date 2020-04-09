@@ -13,11 +13,7 @@ services:
         databases:
           default:
             connector: mongo
-            host: demonic-one-sdk7x.mongodb.net
-            user: azachii_admin
-            password: popodeperro
-            uri: >-
-              mongodb+srv://azachii_admin:popodeperro@cluster0-87br0.gcp.mongodb.net/test?retryWrites=true&w=majority
+            uri: mongodb+srv://azachiiStore:popodeperro@cluster0-zt7tq.gcp.mongodb.net/test?retryWrites=true&w=majority
 
 
 
