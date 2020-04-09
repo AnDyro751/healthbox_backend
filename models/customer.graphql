@@ -7,6 +7,8 @@ type Customer {
     last_name: String # APELLIDOS DEL CUSTOMER
     email: String # EMAIL DEL CUSTOMER, NO REQUERIDO
     address: String # DIRECCIÓN DEL CUSTOMER, NO REQUERIDO
+    outdoor_number: String # NUMERO EXTERIOR
+    interior_number: String # NUMERO INTERIOR
     postal_code: String # CODIGO POSTAL DEL CUSTOMER, NO REQUERIDO
     city: String # CIUDAD DEL CUSTOMER, NO REQUERIDO
     state: String # ESTADO(VIVIENDA) DEL CUSTOMER, NO REQUERIDO
