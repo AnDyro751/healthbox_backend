@@ -13,7 +13,7 @@ const server = new GraphQLServer({
     }
 })
 const corsOptions = {
-    origin: "http://localhost:3000",
+    origin: "https://healthbox.now.sh",
     // credentials: true // <-- REQUIRED backend setting
 }
 server.express.use(cors(corsOptions))
@@ -55,7 +55,7 @@ server.express.use(async (req, res, next) => {
 
 server.start({
     cors: {
-        origin: "https://healthboxapi.now.sh",
+        origin: "https://healthbox.now.sh",
         credentials: false
     }
 }, () => console.log(`The server is running on http://localhost:4000`))
