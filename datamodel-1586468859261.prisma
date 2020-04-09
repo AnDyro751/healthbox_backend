@@ -1,0 +1,47 @@
+# type User {
+
+# }
+
+type Product {
+  id: ID! @id
+  name: String
+  price: Int @default(value: 10)
+  size: String
+  image: String
+  kind: KIND_VALUE
+  people: Int @default(value: 1)
+  max_buy: Int @default(value: 10)
+  min_buy: Int @default(value: 1)
+  discount_for_more: Int @default(value: 7)
+  line_items: [LineItem] @relation(link: INLINE)
+  personalItem: Boolean
+}
+
+enum KIND_VALUE {
+  BOX
+  PERSONAL
+  SUPPPLY
+}
+
+type Customer {
+  id: ID! @id
+  lienItemCount: Int @default(value: 0)
+}
+
+type LineItem {
+  id: ID! @id
+  quantity: Int @default(value: 1)
+  product: Product @relation(link: INLINE)
+}
+
+type Checkout {
+  id: ID! @id
+  uuid: String
+  status: STATUS @default(value: PENDING)
+}
+
+enum STATUS {
+  PENDING
+  SUCCESS
+  ERROR
+}

@@ -1,0 +1,74 @@
+[34m
+* Installing apt-transport-https
+[0m
+Ign:1 http://packages.linuxmint.com tricia InRelease
+Ign:2 http://dl.google.com/linux/chrome/deb stable InRelease
+Obj:3 https://dl.yarnpkg.com/debian stable InRelease
+Obj:4 http://dl.google.com/linux/chrome/deb stable Release
+Obj:5 http://packages.linuxmint.com tricia Release
+Obj:6 http://security.ubuntu.com/ubuntu bionic-security InRelease
+Obj:7 http://archive.ubuntu.com/ubuntu bionic InRelease
+Obj:9 https://deb.nodesource.com/node_12.x bionic InRelease
+Obj:10 http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu bionic InRelease
+Ign:12 https://apt.dockerproject.org/repo ubuntu-bionic InRelease
+Obj:14 http://archive.ubuntu.com/ubuntu bionic-updates InRelease
+Ign:15 https://apt.dockerproject.org/repo ubuntu-xenial InRelease
+Obj:16 http://archive.ubuntu.com/ubuntu bionic-backports InRelease
+Obj:17 http://archive.canonical.com/ubuntu bionic InRelease
+Err:18 https://apt.dockerproject.org/repo ubuntu-bionic Release
+  404  Not Found [IP: 13.226.182.59 443]
+Err:19 https://apt.dockerproject.org/repo ubuntu-xenial Release
+  404  Not Found [IP: 13.226.182.59 443]
+Obj:13 https://packagecloud.io/slacktechnologies/slack/debian jessie InRelease
+Leyendo lista de paquetes...
+E: El repositorio «https://apt.dockerproject.org/repo ubuntu-bionic Release» no tiene un fichero de Publicación.
+E: The repository 'https://apt.dockerproject.org/repo ubuntu-xenial Release' no longer has a Release file.
+[31m'apt-get update' failed, the script will not install the latest version of apt-transport-https.[0m
+Leyendo lista de paquetes...
+Creando árbol de dependencias...
+Leyendo la información de estado...
+apt-transport-https ya está en su versión más reciente (1.6.12).
+Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.
+  libc-ares2 libhttp-parser2.7.1 libuv1 python-cliapp python-markdown
+  python-ttystatus
+Utilice «apt autoremove» para eliminarlos.
+0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 286 no actualizados.
+Leyendo lista de paquetes...
+Creando árbol de dependencias...
+Leyendo la información de estado...
+dirmngr ya está en su versión más reciente (2.2.4-1ubuntu1.2).
+Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.
+  libc-ares2 libhttp-parser2.7.1 libuv1 python-cliapp python-markdown
+  python-ttystatus
+Utilice «apt autoremove» para eliminarlos.
+0 actualizados, 0 nuevos se instalarán, 0 para eliminar y 286 no actualizados.
+[34m
+* Installing APT package sources for Datadog
+[0m
+Warning: apt-key output should not be parsed (stdout is not a terminal)
+Executing: /tmp/apt-key-gpghome.O4NJwDOZQ4/gpg.1.sh --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE
+gpg: key D3A80E30382E94DE: public key "Datadog, Inc <package@datadoghq.com>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+[34m
+* Installing the Datadog Agent package
+[0m
+Ign:1 https://apt.datadoghq.com stable InRelease
+Des:2 https://apt.datadoghq.com stable Release [8 324 B]
+Des:3 https://apt.datadoghq.com stable Release.gpg [819 B]
+Des:4 https://apt.datadoghq.com stable/7 amd64 Packages [2 651 B]
+Descargados 11.8 kB en 1s (9 634 B/s)
+Leyendo lista de paquetes...
+Leyendo lista de paquetes...
+Creando árbol de dependencias...
+Leyendo la información de estado...
+Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.
+  libc-ares2 libhttp-parser2.7.1 libuv1 python-cliapp python-markdown
+  python-ttystatus
+Utilice «apt autoremove» para eliminarlos.
+Se instalarán los siguientes paquetes NUEVOS:
+  datadog-agent
+0 actualizados, 1 nuevos se instalarán, 0 para eliminar y 286 no actualizados.
+Se necesita descargar 136 MB de archivos.
+Se utilizarán 457 MB de espacio de disco adicional después de esta operación.
+Des:1 https://apt.datadoghq.com stable/7 amd64 datadog-agent amd64 1:7.18.1-1 [136 MB]
