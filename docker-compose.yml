@@ -8,12 +8,14 @@ services:
     environment:
       PRISMA_CONFIG: |
         port: 4466
-        # uncomment the next line and provide the env var PRISMA_MANAGEMENT_API_SECRET=my-secret to activate cluster security
-        managementApiSecret: popodeperro
+        #         uncomment the next line and provide the env var PRISMA_MANAGEMENT_API_SECRET=my-secret to activate cluster security
+        #        managementApiSecret: popodeperro
         databases:
           default:
             connector: mongo
-            schema: default_default
+            host: demonic-one-sdk7x.mongodb.net
+            user: azachii_admin
+            password: popodeperro
             uri: >-
               mongodb+srv://azachii_admin:popodeperro@cluster0-87br0.gcp.mongodb.net/test?retryWrites=true&w=majority
 
